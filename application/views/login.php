@@ -25,10 +25,10 @@
     <div class="col-md-7" style="border-left:1px solid #ccc;height:160px">
 	
 	<?php 
-		echo form_open("Login");
+		echo form_open('verifylogin');
 			echo form_input("username",$username,"placeholder='Enter User Name' class='form-control input-md'");
 			echo '<div class="spacing"></div>';
-			echo form_input("password",$password,"placeholder='Enter Password' class='form-control input-md'");
+			echo form_password("password",$password,"placeholder='Enter Password' class='form-control input-md'");
 			echo '<div class="spacing"></div>';
 			echo form_checkbox("rememberChk", "Remember me", FALSE); echo "<small>Remember me</small>";
 			echo '<a href="#"><small style="float:right;"> Forgot Password?</small></a><br>';

@@ -3,7 +3,7 @@ class Login extends CI_Controller {
 
         public function index()
         {	
-			$this->load->helper('form');
+			$this->load->helper(array('form'));
 			$this->load->library('form_validation');
 			$data = [];
 			$data['username'] = '';
