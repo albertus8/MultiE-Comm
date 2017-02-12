@@ -1,5 +1,4 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 class VerifyLogin extends CI_Controller {
 
 	function __construct()
@@ -11,10 +10,10 @@ class VerifyLogin extends CI_Controller {
 	function index(){
 		//This method will have the credentials validation
 		$this->load->library('form_validation');
-		
+
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required');
-		
+        $this->form_validation->set_rules('password','Wrong password','required|min_length[4]|max_length[8]');
+
 		if($this->form_validation->run() == FALSE)
 		{
 			//Field validation failed.  User redirected to login page

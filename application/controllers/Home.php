@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+//defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
@@ -21,8 +21,11 @@ class Home extends CI_Controller {
 	public function index()
 	{
         $session_id = $this->session->userdata('loginData');
-        echo $session_id["ID_user"].'<br>';
-        echo $session_id["username"].'<br>';
+        $this->load->helper(array('form'));
+        $this->load->library('form_validation');
+//        echo $session_id["ID_user"].'<br>';
+//        echo $session_id["username"].'<br>';
+//        echo $session_id["firstname"].'<br>';
 //        var_dump($session_id["users"]);
 //		if($this->session->userdata('loginData')){
 //
@@ -34,9 +37,13 @@ class Home extends CI_Controller {
 ////            $idolater = $this->session->userdata['loginData']['ID_user'];
 ////            $username = $this->session->userdata['loginData']['username'];
 ////            echo $idolater."<BR>".$username;
-////			$this->load->view('header');
-////			$this->load->view('index');
-////			$this->load->view('footer');
+
+        if($this->session->userdata('loginData')) {
+            $this->load->view('header', $session_id);
+            $this->load->view('index');
+            $this->load->view('footer');
+        }
+
 //		}
 //		else
 //		{
@@ -48,7 +55,8 @@ class Home extends CI_Controller {
 //	function logout()
 //	 {
 //	   $this->session->unset_userdata('logged_in');
-//	   session_destroy();
-//	   redirect('home', 'refresh');
+//	   $this->session->sess_destroy();
+//        $this->Auth->logout();
+//	   redirect('Login', 'refresh');
 //	 }
 }
