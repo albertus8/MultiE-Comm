@@ -1,0 +1,20 @@
+[
+	{
+		"ID_user"	:"EC201216ED001",
+		"username"	:"dummyuser1",
+		"password"	:"44e4353c13cc95c131b4be7f72a36d9ecceaae1ba19f8321e0e804c923286350",
+		"firstname"	:"Edy"
+	},
+	{
+		"ID_user"	:"EC201216ED002",
+		"username"	:"dummyuser2",
+		"password"	:"44e4353c13cc95c131b4be7f72a36d9ecceaae1ba19f8321e0e804c923286350",
+		"firstname"	:"Edy"
+	},
+	{
+		"ID_user"	:"EC201216ED003",
+		"username"	:"dummyuser3",
+		"password"	:"44e4353c13cc95c131b4be7f72a36d9ecceaae1ba19f8321e0e804c923286350",
+		"firstname"	:"Edy"
+	};
+]
