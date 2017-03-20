@@ -1,0 +1,33 @@
+Register							t
+Login								v
+User Info											
+Recovery Password									
+History Activity								
+Search								t	sort by date or id transaction	
+Data Penjualan						v
+Analytic Report						t	overview reports: barang terlaris
+Setting DB							
+	API								v get file from client, write file to root folder (json)
+	Data Blog						
+Contact Us							v
+
+------ back end
+Master Paket Fitur	(Super Admins)	v insert delete
+Master Subscriber	(Super Admins)	v insert update delete
+Master Transactions (Super Admins)	t only view, confirmation page
+
+ID_user
+EC101216AL001
+
+multiecomm.inquiry@gmail.com
+multiecomminquiry
+
+	'hostname' => 'mysql.idhostinger.com',
+	'username' => 'u240467419_root',
+	'password' => 'adminroot',
+	'database' => 'u240467419_meco',
+
+ftp host		: mysql.idhostinger.com
+mysql database	: u240467419_meco
+mysql user		: u240467419_root
+mysql password	: adminroot

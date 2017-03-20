@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<post>
+		<id>EC101216AL001</id>
+		<username>albertus.adhi</username>
+		<password>2a447fd732a46a7194aa4ce05dddcddb4420e4698e04d3cc6332e28dd982f948</password>
+		<firstname>Albertus</firstname>
+		<joindate>2016-12-15 09:33:38</joindate>
+	</post>
+	<post>
+		<id>EC151216AL002</id>
+		<username>albertus8</username>
+		<password>2a447fd732a46a7194aa4ce05dddcddb4420e4698e04d3cc6332e28dd982f948</password>
+		<firstname>Albertus</firstname>
+		<joindate>2016-12-15 09:36:15</joindate>
+	</post>
+	<post>
+		<id>EC210217HA001</id>
+		<username>hafish</username>
+		<password>3cc849279ba298b587a34cabaeffc5ecb3a044bbf97c516fab7ede9d1af77cfa</password>
+		<firstname>Hafidh</firstname>
+		<joindate>2017-02-21 16:03:36</joindate>
+	</post>
+	<post>
+		<id>EC210217SH001</id>
+		<username>shodiqin</username>
+		<password>b4e198018a6d25871bedba84801527ffde82fdf924c8e7e404af293129eabec3</password>
+		<firstname>Shodiq</firstname>
+		<joindate>2017-02-21 01:57:07</joindate>
+	</post>
+	<post>
+		<id>EC220217JF001</id>
+		<username>jfoe09</username>
+		<password>324fbd3a9c7100837b90b3351e53e97050a22c85678b9226386bd7066ed2ca0c</password>
+		<firstname>Jordy</firstname>
+		<joindate>2017-02-22 02:13:30</joindate>
+	</post>
+	<post>
+		<id>EC220217OR001</id>
+		<username>orangorangorang</username>
+		<password>0a15c4b4387ae42481132dd80cdd29b4210964391403aebc494953853c63b101</password>
+		<firstname>Fabian</firstname>
+		<joindate>2017-02-22 02:12:34</joindate>
+	</post>
+	<post>
+		<id>EC220217SH001</id>
+		<username>shirotenshi</username>
+		<password>9107eddb94e92a36a3aac5d2e97fc2bc195e1dd0c5b88644c46414882b4cefb6</password>
+		<firstname>Dave</firstname>
+		<joindate>2017-02-22 02:11:55</joindate>
+	</post>
+	<post>
+		<id>EC220217ST001</id>
+		<username>stefanus77</username>
+		<password>b0754da5927cbefcd795e417040261c3a78fd8c5c86af6380c2bca4a5984d92e</password>
+		<firstname>Stefanus</firstname>
+		<joindate>2017-02-22 02:10:58</joindate>
+	</post>
+	<post>
+		<id>EC220217TO001</id>
+		<username>tonnymoo</username>
+		<password>29976ab4a7a41ddd19d70e00517845e08d42e41ee80dcd37a5d8e696f900451a</password>
+		<firstname>Tonny</firstname>
+		<joindate>2017-02-22 02:15:37</joindate>
+	</post>
+	<post>
+		<id>EC301216ED001</id>
+		<username>whoami</username>
+		<password>808d08d56adc44ecd35f4a603f29e2357dadd0cfd477cb6c49b98505d85f5139</password>
+		<firstname>Eduardo</firstname>
+		<joindate>2016-12-30 16:27:00</joindate>
+	</post>
+</root>

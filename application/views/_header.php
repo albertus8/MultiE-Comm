@@ -44,22 +44,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $( document ).ready(function() {
             $(".container-fluid").hide().fadeIn('slow');
 
-            // Data Tables
-            $( "#datatables" ).click(function() {
+            // Seubscriber
+            $( "#subscriber" ).click(function() {
                 $(".collapse .active").removeClass("active");
                 $(this).addClass("active");
-                $(".container-fluid").load("Tables",function(){}).hide().fadeIn('slow');
+//                $(".container-fluid").fadeOut{'slow'};
+                $(".container-fluid").load("Subscriber",function(){}).hide().fadeIn('slow');
             });
-            // Database Setting
-            $( "#dbsetting" ).click(function() {
+            // Paket Fitur
+            $( "#fitur" ).click(function() {
                 $(".collapse .active").removeClass("active");
                 $(this).addClass("active");
-                $(".container-fluid").load("Setting",function(){}).hide().fadeIn('slow');
+//                $(".container-fluid").fadeOut{'slow'};
+                $(".container-fluid").load("Fitur",function(){}).hide().fadeIn('slow');
+            });
+            // Master Transaksi
+            $( "#transaction" ).click(function() {
+                $(".collapse .active").removeClass("active");
+                $(this).addClass("active");
+//                $(".container-fluid").fadeOut{'slow'};
+                $(".container-fluid").load("transaction",function(){}).hide().fadeIn('slow');
             });
             // Monthly Reports
             $( "#monthly" ).click(function() {
                 $(".collapse .active").removeClass("active");
                 $(this).addClass("active");
+//                $(".container-fluid").fadeOut{'slow'};
                 $(".container-fluid").load("Report/Monthly",function(){}).hide().fadeIn('slow');
             });
             // Weekly Reports
@@ -73,6 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $( "#contactdev" ).click(function() {
                 $(".collapse .active").removeClass("active");
                 $(this).addClass("active");
+//                $(".container-fluid").fadeOut{'slow'};
                 $(".container-fluid").load("Contact",function(){}).hide().fadeIn('slow');
             });
         });
@@ -89,7 +100,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="Home">Multi E-Commerce Admin</a>
+        <a class="navbar-brand" href="Admins">Multi E-Commerce Super Admin</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
@@ -196,23 +207,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li class="active">
-                <a href="Home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                <a href="Admins"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
-            <li>
-                <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+            <li id="subscriber" style="cursor: pointer;">
+                <a><i class="fa fa-fw fa-bar-chart-o"></i> Master Subscriber</a>
             </li>
-            <li id="datatables" style="cursor: pointer;">
-                <a><i class="fa fa-fw fa-table"></i> Data Tables</a>
+            <li id="fitur" style="cursor: pointer;">
+                <a><i class="fa fa-fw fa-table"></i> Master Paket Fitur</a>
             </li>
-            <!--                    <li>-->
-            <!--                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>-->
-            <!--                    </li>-->
-            <!--                    <li>-->
-            <!--                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>-->
-            <!--                    </li>-->
-            <!--                    <li>-->
-            <!--                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>-->
-            <!--                    </li>-->
+            <li id="transaction" style="cursor: pointer;">
+                <a><i class='fa fa-fw fa-cogs'></i> Master Transactions </a>
+            </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-file"></i> Analytic Reports <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="demo" class="collapse">
@@ -224,18 +229,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
                 </ul>
             </li>
-
-<!--                --><?php
-//                echo form_open('setting');
-//                    echo "<li>";
-//                    echo "<a href='Setting'><i class='fa fa-fw fa-cogs'></i> DB Connection Setting </a>";
-//                    echo "</li>";
-//                echo form_close();
-//                ?>
-            <li id="dbsetting" style="cursor: pointer;">
-                <a><i class='fa fa-fw fa-cogs'></i> DB Connection Setting </a>
-            </li>
-
             <li id="contactdev" style="cursor: pointer;">
                 <a><i class="fa fa-fw fa-envelope-o"></i> Contact Developer </a>
             </li>

@@ -4,7 +4,7 @@
  * Project MultiE-Comm
  * on Feb 2017.
  */
-Class dbReport extends CI_Model
+Class DbReport extends CI_Model
 {
     function __construct()
     {
