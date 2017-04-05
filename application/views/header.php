@@ -50,6 +50,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $(this).addClass("active");
                 $(".container-fluid").load("Tables",function(){}).hide().fadeIn('slow');
             });
+            // Charts
+            $( "#charts" ).click(function() {
+                $(".collapse .active").removeClass("active");
+                $(this).addClass("active");
+                $(".container-fluid").load("Charts",function(){}).hide().fadeIn('slow');
+            });
             // Database Setting
             $( "#dbsetting" ).click(function() {
                 $(".collapse .active").removeClass("active");
@@ -198,8 +204,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="active">
                 <a href="Home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
-            <li>
-                <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+            <li id="charts">
+                <a><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
             </li>
             <li id="datatables" style="cursor: pointer;">
                 <a><i class="fa fa-fw fa-table"></i> Data Tables</a>

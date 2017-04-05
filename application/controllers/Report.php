@@ -9,7 +9,7 @@ class Report extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('dbReport','',TRUE);
+        $this->load->model('DbReport','',TRUE);
     }
     public function index()
     {
