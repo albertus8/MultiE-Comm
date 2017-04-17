@@ -126,8 +126,6 @@ class Subscriber extends CI_Controller
 
     function insertUser(){
         $getData = $this->input->post('getData');
-
-//        var_dump($data);
         $getDataArray = array(
             array(
                 'ID_user' => "",
