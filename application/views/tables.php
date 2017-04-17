@@ -18,33 +18,49 @@
                 data: {getData: something},
                 type: 'post',
                 success: function(result) {
-                    $(".popuppanel").html(result);
+                    $(".modal-body pre").html(result);
                 }
             });
         });
-        $('#close-icon').on('click',function(){
-            unloadPopupBox();
-        });
-
-//        $('.table tr').on('click',function(){
-//
+//        $('#close-icon').on('click',function(){
+//            unloadPopupBox();
 //        });
-
 
         function loadPopupBox()
         {
-            $('body').css('overflow','hidden');
-            $("#popupbackground").fadeIn("slow");
-            $("#popupbox").fadeIn("slow");
+//            $('body').css('overflow','hidden');
+            //$("#popupbackground").fadeIn("slow");
+            $('#myModal').modal('toggle');
+            //$("#popupbox").fadeIn("slow")
+//            $(".modal-body").css('overflow','auto !important');
         }
-        function unloadPopupBox()
-        {
-            $('body').css('overflow','auto');
-            $("#popupbackground").fadeOut("normal");
-            $("#popupbox").fadeOut("normal");
-        }
-        $("#popupbackground").hide();
-        $("#popupbox").hide();
+//        function unloadPopupBox()
+//        {
+//            $('body').css('overflow','auto');
+//            $("#popupbackground").fadeOut("normal");
+//            $("#popupbox").fadeOut("normal");
+////            $(".modal-body").css('overflow','hidden !important');
+////            $("body").css('overflow','auto !important');
+//        }
+//        $("#popupbackground").hide();
+//        $("#popupbox").hide();
+
+        $("#searchBox").on('keyup', function (e) {
+            if (e.keyCode == 13) {
+                // Do something
+//                alert("enter");
+                var something = $(this).val();
+                $(".modal-body pre").html(something);
+//                $.ajax({
+////                    url: 'Tables/searchData',
+////                    data: {searchData: $(this).val()},
+////                    type: 'post',
+//                    success: function(result) {
+//                        $(".modal-body pre").html(result);
+//                    }
+//                });
+            }
+        });
     });
 </script>
 <div class="row">
@@ -76,7 +92,6 @@
             <div class="panel-body">
                 <?php for ($i = 0; $i < count($toko); $i++) { ?>
                     <div class="col-lg-6">
-
                         <h2>Data Penjualan <?php echo ucwords(strtolower($toko[$i]['NamaToko'])); ?></h2>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -105,10 +120,49 @@
                         </div>
                     </div>
                 <?php } ?>
-                <div id="popupbackground"> </div>
-                <div id="popupbox">
-                    <img id="close-icon" src="<?php echo base_url("assets/images/close-icon.png"); ?>" />
-                    <div class="popuppanel"></div>
+<!--                <div id="popupbackground"> </div>-->
+<!--                <div id="popupbox">-->
+<!--                    <img id="close-icon" src="--><?php //echo base_url("assets/images/close-icon.png"); ?><!--" />-->
+<!--                    <div class="popuppanel">-->
+<!--                        <div style="position: relative;float: left">Search : <input type='text' name='searchBox' id='searchBox' /></div>-->
+<!--                        <pre>-->
+<!---->
+<!--                        </pre>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Detail Nota Penjualan</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div style="float: left">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                Search
+                                            </td>
+                                            <td>
+                                                : <input type='text' name='searchBox' id='searchBox' />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <br />
+                                <hr />
+                                <pre>
+
+                                 </pre>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
@@ -124,53 +178,66 @@
         cursor: pointer;
     }
 
-    #popupbox {
-        position:fixed; _position:absolute; /*hack for IE6*/
-        background:#FFF;
-        color: #000;
-        width: 500px;
-        min-height: 500px;
-        left:472px;
-        top:100px;
-        border:2px solid lightgray;
-        padding:15px;
-        z-index:100px;
-        font-size:15px;
-        -moz-box-shadow: 0px 0px 5px lightgray;
-        -webkit-box-shadow:0px 0px 5px lightgray;
-        box-shadow:0px 0px 5px lightgray;
-    }
+    /*#popupbox {*/
+        /*position:fixed; _position:absolute; !*hack for IE6*!*/
+        /*background:#FFF;*/
+        /*color: #000;*/
+        /*width: 500px;*/
+        /*max-height: 500px;*/
+        /*!*left:472px;*!*/
+        /*!*top:100px;*!*/
+        /*margin: -200px 200px auto;*/
+        /*border:2px solid lightgray;*/
+        /*padding:15px;*/
+        /*z-index:100px;*/
+        /*font-size:15px;*/
+        /*-moz-box-shadow: 0px 0px 5px lightgray;*/
+        /*-webkit-box-shadow:0px 0px 5px lightgray;*/
+        /*box-shadow:0px 0px 5px lightgray;*/
+    /*}*/
 
-    #popupclose {
-        border:0px solid lightgray;
-        color:#6FA5E2;
-        font-family:sans-serif;
-        font-weight:bold;
-        line-height:15px;
-        float:right;
-        cursor:pointer;
-        text-decoration:none;
-    }
-
-    #popupbackground{
-        position:fixed; _position:absolute; /*hack for IE6*/
-        background:#000;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        /*background-color: #000;*/
-        opacity: 0.5;
-        z-index: 50px;
-    }
-    
-    #close-icon{
-        /*position: fixed;*/
-        width: 20px;
+    .modal-body pre{
+        /*position:relative; _position:absolute; !*hack for IE6*!*/
         float: right;
-        margin-top:-25px;
-        margin-right:-25px;
-        cursor: pointer;
+        width: 100%;
+        /*max-height: 445px;*/
+        /*border: 1px solid red;*/
     }
+
+    .modal-content{
+        min-height: 635px;
+    }
+
+    /*#popupclose {*/
+        /*border:0px solid lightgray;*/
+        /*color:#6FA5E2;*/
+        /*font-family:sans-serif;*/
+        /*font-weight:bold;*/
+        /*line-height:15px;*/
+        /*float:right;*/
+        /*cursor:pointer;*/
+        /*text-decoration:none;*/
+    /*}*/
+
+    /*#popupbackground{*/
+        /*position:fixed; _position:absolute; !*hack for IE6*!*/
+        /*background:#000;*/
+        /*top: 0;*/
+        /*left: 0;*/
+        /*width: 100%;*/
+        /*height: 100%;*/
+        /*!*background-color: #000;*!*/
+        /*opacity: 0.5;*/
+        /*z-index: 50px;*/
+    /*}*/
+    
+    /*#close-icon{*/
+        /*!*position: fixed;*!*/
+        /*width: 20px;*/
+        /*float: right;*/
+        /*margin-top:-25px;*/
+        /*margin-right:-25px;*/
+        /*cursor: pointer;*/
+    /*}*/
 
 </style>

@@ -1,5 +1,5 @@
 <?php
-//defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
@@ -43,20 +43,10 @@ class Home extends CI_Controller {
             $this->load->view('index');
             $this->load->view('footer');
         }
-
-//		}
-//		else
-//		{
-//			//If no session, redirect to login page
-//			// redirect('login', 'refresh');
-//		}
-		
+		else
+		{
+			//If no session, redirect to login page
+			 redirect('', 'refresh');
+		}
 	}
-//	function logout()
-//	 {
-//	   $this->session->unset_userdata('logged_in');
-//	   $this->session->sess_destroy();
-//        $this->Auth->logout();
-//	   redirect('Login', 'refresh');
-//	 }
 }

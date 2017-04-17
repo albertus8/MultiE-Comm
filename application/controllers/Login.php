@@ -34,20 +34,26 @@ class Login extends CI_Controller {
                 $password = $this->input->post('password');
 
                 $result = $this->dbLogin->login($username, $password);
-//                var_dump($result);
+                echo "<pre>";
+                var_dump($result["userLevel"]);
+                echo "</pre>";
                 if($result)
                 {
+                    $this->session->set_userdata('loginData', $result);
+                    if($result["userLevel"] == "1"){
+                        redirect('Admins');
+                    }elseif ($result["userLevel"] == "2" || $result["userLevel"] == "3"){
+                        redirect('Home');
+                    }
 //                $data['usersLogin'] = $this->dbLogin->login($username, $password);
 //                var_dump($data);
-                    $this->session->set_userdata('loginData', $result);
-                    redirect('Home');
+
+//                    redirect('Home');
                 }
                 else
                 {
                     redirect('login');
-                    echo '<div class="alert alert-danger" style="position:absolute;width:100%;top:0;">
-                            <strong>Error!</strong> Username or Password wrong. Please try again.
-                    </div>';
+                    echo '<div class="alert alert-danger" style="position:absolute;width:100%;top:0;"><strong>Error!</strong> Username or Password wrong. Please try again.</div>';
                 }
                 //$value = $this->m_login->login($username,$password,$rememberChk);
 
@@ -65,10 +71,7 @@ class Login extends CI_Controller {
                 // }
             }else{
                 redirect('login');
-                echo '<div class="alert alert-danger" style="position:absolute;width:100%;top:0;">
-                            <strong>Error!</strong> Username or Password wrong. Please try again.
-                    
-                    </div>';
+                echo '<div class="alert alert-danger" style="position:absolute;width:100%;top:0;"><strong>Error!</strong> Username or Password wrong. Please try again.</div>';
             }
         }
         $this->load->view('login', $data);

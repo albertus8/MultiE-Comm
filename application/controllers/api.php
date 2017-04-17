@@ -6,7 +6,7 @@
  */
 require(APPPATH.'libraries/REST_Controller.php');
 
-class Example_api extends REST_Controller {
+class api extends REST_Controller {
     function __construct()
     {
         parent::__construct();
@@ -27,26 +27,52 @@ class Example_api extends REST_Controller {
 
     }
 
-    function user_get()
+    function fileUpload_post()
     {
-//        $data = array('returned: '. $this->post('id'));
-//        $this->response($data);
-//        print_r($data);
-//        echo "Ryu no baka :(";
-//        $fp = fopen(APPPATH.'results.json', 'r');
-        $json = file_get_contents(APPPATH.'results.json');
-        $parameters = (array) json_decode($json, true);
-//        echo '<pre>'; print_r($parameters); echo '</pre>';
+        $data = $_FILES['file'];
+        $dataID = $this->input->post('idUser');
+        $config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
+        $config['allowed_types'] = 'json|xml';
+        $config['max_size'] = 1024 * 8;
+        $config['encrypt_name'] = TRUE;
 
-        $this->insertApi->insertData($parameters);
-
-
-//        $file = APPPATH . 'testFile.json';
-//        $json = file_get_contents($file);
-//        $input_data = json_decode(trim($json), true);
+        $this->load->library('upload', $config);
 //
-//        var_dump($input_data);
+//        echo "<pre>";
+//        print_r($data["type"]);
+//        echo "</pre>";
 
+        $dataGet = file_get_contents($data["tmp_name"]);
+        $hashedID = hash('sha256', 'data-'.$dataID);
+        if (file_exists(APPPATH.'uploads/'.$hashedID.'.json')) {
+//            echo "<pre>";
+//            echo "exist";
+//            echo "</pre>";
+        }
+        else
+        {
+            $fp = fopen(APPPATH.'uploads/'.$hashedID.'.json', 'wb');
+            if($data["type"] == "text/xml"){
+                $xml = simplexml_load_string($dataGet);
+                $json = json_encode($xml);
+                $array = json_decode(trim($json),TRUE);
+                fwrite($fp, json_encode($array));
+    //            echo "<pre>";
+    //            print_r(json_encode($array));
+    //            echo "</pre>";
+            }
+            else
+            {
+                $input_data = json_decode(trim($dataGet), true);
+                fwrite($fp, json_encode($input_data));
+    //            echo "<pre>";
+    //            print_r($input_data);
+    //            echo "</pre>";
+            }
+            fclose($fp);
+            echo "1";
+            return true;
+        }
     }
 
     function json_get()

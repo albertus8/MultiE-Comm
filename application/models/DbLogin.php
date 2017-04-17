@@ -1,5 +1,5 @@
 <?php
-Class dbLogin extends CI_Model
+Class DbLogin extends CI_Model
 {
     function __construct()
     {
@@ -11,7 +11,7 @@ Class dbLogin extends CI_Model
     function login($username, $password)
 	{
 	    $hashedPass = hash('sha256', $password);
-		$this -> db -> select('ID_user,username,firstname');
+		$this -> db -> select('*');
 		$this -> db -> from('userlist');
 		$this -> db -> where('username',$username);
 		$this -> db -> where('password',$hashedPass);
@@ -29,4 +29,3 @@ Class dbLogin extends CI_Model
 		}
 	}
 }
-?>
