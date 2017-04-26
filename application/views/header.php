@@ -13,13 +13,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>MultiE-Comm</title>
 
     <!-- jQuery -->
-    <script src="<?php echo base_url("assets/js/jquery-3.1.1.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/jquery-3.2.1.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/ext/moment.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/ext/transition.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/ext/bootstrap-collapse.js"); ?>"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="<?php echo base_url("assets/js/bootstrap.min.js"); ?>"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script type="text/javascript" src="<?php echo base_url("assets/js/plugins/morris/raphael.min.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/plugins/morris/morris.min.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/plugins/morris/morris-data.js"); ?>"></script>
+
+    <!-- External DatePicker JavaScript -->
+    <script src="<?php echo base_url("assets/js/ext/bootstrap-datepicker.js"); ?>"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url("assets/css/sb-admin.css"); ?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/ext/bootstrap-datetimepicker.css"); ?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/ext/bootstrap-datetimepicker.min.css"); ?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/ext/datepicker.css"); ?>" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="<?php echo base_url("assets/css/plugins/morris.css"); ?>" rel="stylesheet">
@@ -30,11 +47,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdxz4UYsbPHqdXW4syGL29cDvsuD19Gs0&callback=initMap"
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdxz4UYsbPHqdXW4syGL29cDvsuD19Gs0&callback="
             type="text/javascript"></script>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
@@ -80,6 +97,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $(".collapse .active").removeClass("active");
                 $(this).addClass("active");
                 $(".container-fluid").load("Contact",function(){}).hide().fadeIn('slow');
+            });
+
+            // profile page
+            $( "#userprofile" ).click(function() {
+                $(".container-fluid").load("UserProfile",function(){}).hide().fadeIn('slow');
             });
         });
     </script>
@@ -182,15 +204,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><?php echo "&nbsp;".$firstname ?> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-user"></i> User Profile</a>
+                <li id="userprofile" style="cursor: pointer;">
+                    <a><i class="fa fa-fw fa-user"></i> User Profile</a>
                 </li>
                 <!--                        <li>-->
                 <!--                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>-->
                 <!--                        </li>-->
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-gear"></i> User Settings</a>
-                </li>
+<!--                <li>-->
+<!--                    <a href="#"><i class="fa fa-fw fa-gear"></i> User Settings</a>-->
+<!--                </li>-->
                 <li class="divider"></li>
                 <li>
                     <a href="Logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>

@@ -1,7 +1,6 @@
     <div id="wrapper">
     <div id="line-example"></div>
 
-
         <div id="page-wrapper">
 
             <div class="container-fluid">

@@ -131,7 +131,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12 tab-pane fade" id="transaction2">
-                    <h2>Dara Konfirmasi Transaksi</h2>
+                    <h2>Data Konfirmasi Transaksi</h2>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead>

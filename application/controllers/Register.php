@@ -20,6 +20,7 @@ class Register extends CI_Controller {
         $data = [];
         $data['ID_user'] = '';
         $data['username'] = '';
+        $data['email'] = '';
         $data['password'] = '';
         $data['confirmpassword'] = '';
         $data['firstname'] = '';
@@ -38,6 +39,7 @@ class Register extends CI_Controller {
                     array(
                         'username' => $this->input->post('username'),
                         'password' => $this->input->post('password'),
+                        'email' => $this->input->post('email'),
                         'firstname' => $this->input->post('firstname'),
                         'lastname' => $this->input->post('lastname'),
                         'joindate' => "",

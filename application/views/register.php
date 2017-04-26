@@ -55,6 +55,11 @@
                         echo form_input("username",$username,"placeholder='Enter Username Here' class='form-control input-md'");
                         echo "</div>";
                         echo "<div class='form-group'>";
+                        echo "<label for='email'>Email :</label>";
+                        //                        echo "<input type='password' class='form-control' name='inputPassword' id='inputPassword' placeholder='Enter Password here' />";
+                        echo form_input("email",$email,"placeholder='Enter Email Here' class='form-control input-md'");
+                        echo "</div>";
+                        echo "<div class='form-group'>";
                         echo "<label for='password'>Password :</label>";
 //                        echo "<input type='password' class='form-control' name='inputPassword' id='inputPassword' placeholder='Enter Password here' />";
                         echo form_password("password",$password,"placeholder='Enter Password here' class='form-control input-md'");
