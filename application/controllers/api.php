@@ -29,25 +29,33 @@ class api extends REST_Controller {
 
     function fileUpload_post()
     {
+        $session_id = $this->session->userdata('loginData');
+
         $data = $_FILES['file'];
-        $dataID = $this->input->post('idUser');
+        $ctr = 0;
+        $hashedID = 'data-'.$session_id['ID_user'].'-';
         $config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
         $config['allowed_types'] = 'json|xml';
         $config['max_size'] = 1024 * 8;
         $config['encrypt_name'] = TRUE;
 
-        $this->load->library('upload', $config);
-//
-//        echo "<pre>";
-//        print_r($data["type"]);
-//        echo "</pre>";
 
+        $this->load->library('upload', $config);
+
+        $file = scandir(APPPATH.'uploads/');
         $dataGet = file_get_contents($data["tmp_name"]);
-        $hashedID = hash('sha256', 'data-'.$dataID);
+
+        for($i=2;$i < count($file); $i++){
+            if(substr($file[$i], 0, 19) == $hashedID){
+                $ctr++;
+            }
+        }
+
+        $padStr = str_pad($ctr+1,5,"0",STR_PAD_LEFT);
+        $hashedID .= $padStr;
+
         if (file_exists(APPPATH.'uploads/'.$hashedID.'.json')) {
-//            echo "<pre>";
-//            echo "exist";
-//            echo "</pre>";
+
         }
         else
         {
@@ -55,40 +63,40 @@ class api extends REST_Controller {
             if($data["type"] == "text/xml"){
                 $xml = simplexml_load_string($dataGet);
                 $json = json_encode($xml);
-                $array = json_decode(trim($json),TRUE);
+
+                $lenght = strlen($json);
+                $pos1 = strpos($json, '[', 0);
+                $anotherVar = substr($json, $pos1, $lenght-$pos1-1);
+
+                $array = json_decode(trim($anotherVar),TRUE);
                 fwrite($fp, json_encode($array));
-    //            echo "<pre>";
-    //            print_r(json_encode($array));
-    //            echo "</pre>";
             }
             else
             {
                 $input_data = json_decode(trim($dataGet), true);
                 fwrite($fp, json_encode($input_data));
-    //            echo "<pre>";
-    //            print_r($input_data);
-    //            echo "</pre>";
             }
             fclose($fp);
-            echo "1";
-            return true;
         }
+
+        $this->insertApi->insertData($session_id['ID_user']);
+        return true;
     }
 
     function json_get()
     {
         // GET DATA FROM DB THEN WRITE TO JSON FILE
         // get data from db
-        $query = $this->db->get("userlist");
+        $query = $this->db->get("data_penjualan");
         // insert data to array
         foreach ($query->result() as $row)
         {
             $post[] = array(
-                "id"         => $row->ID_user,
-                "username"   => $row->username,
-                "password"   => $row->password,
-                "firstname"  => $row->firstname,
-                "joindate"   => $row->joindate
+                "id"         => $row->ID_DPENJUALAN,
+                "iduser"    => $row->ID_user,
+                "namatoko"  => $row->NAMA_TOKO,
+                "tanggal"          => $row->TGL_BELI,
+                "totalpenjualan"  => $row->TOTAL_PENJUALAN
             );
         }
         // encode json
@@ -97,13 +105,14 @@ class api extends REST_Controller {
 
         //write to disk
         $fp = fopen(APPPATH.'data.json', 'w');
-        fwrite($fp, json_encode($response));
+        fwrite($fp, json_encode($post));
         fclose($fp);
         echo "<pre>";
         echo "file written to ".APPPATH.'data.json';
         print_r($post);
         // END OF SYNTAX
     }
+
 //
 //    function user_put()
 //    {

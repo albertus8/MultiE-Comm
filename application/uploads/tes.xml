@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<data>
+		<idbarang>BC270417000002</idbarang>
+		<namabarang>GTX 1050 ZOTAC</namabarang>
+		<jenis>GPU</jenis>
+		<quantity>19</quantity>
+		<hargasatuan>2100000</hargasatuan>
+	</data>
+	<data>
+		<idbarang>BC270417000004</idbarang>
+		<namabarang>Mi Gamepad</namabarang>
+		<jenis>Accesories</jenis>
+		<quantity>19</quantity>
+		<hargasatuan>250000</hargasatuan>
+	</data>
+</root>

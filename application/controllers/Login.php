@@ -10,11 +10,21 @@ class Login extends CI_Controller {
     {
         $this->load->helper(array('form'));
         $this->load->library('form_validation');
+        $session_id = $this->session->userdata('loginData');
         $data = [];
         $data['username'] = '';
         $data['password'] = '';
         $data['rmbMe'] = '';
+        $this->output->enable_profiler(TRUE);
 
+
+        if($session_id){
+            if($session_id["userLevel"] == 1){
+                redirect('Admins');
+            }elseif ($session_id["userLevel"] == "2" || $session_id["userLevel"] == "3"){
+                redirect('Home');
+            }
+        }
         // direct to register page
         if($this->input->post('registerPage') == true){
             redirect('Register');
@@ -34,16 +44,26 @@ class Login extends CI_Controller {
                 $password = $this->input->post('password');
 
                 $result = $this->dbLogin->login($username, $password);
-                echo "<pre>";
-                var_dump($result["userLevel"]);
-                echo "</pre>";
+
                 if($result)
                 {
                     $this->session->set_userdata('loginData', $result);
+                    $from = $this->session->userdata('From');
                     if($result["userLevel"] == "1"){
-                        redirect('Admins');
+                        if($from == 'checkout'){
+                            $this->session->unset_userdata('From');
+                            redirect('Checkout');
+                        }else{
+                            redirect('Admins');
+                        }
+
                     }elseif ($result["userLevel"] == "2" || $result["userLevel"] == "3"){
-                        redirect('Home');
+                        if($from == 'checkout'){
+                            $this->session->unset_userdata('From');
+                            redirect('Checkout');
+                        }else{
+                            redirect('Home');
+                        }
                     }
 //                $data['usersLogin'] = $this->dbLogin->login($username, $password);
 //                var_dump($data);

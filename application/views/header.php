@@ -13,13 +13,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>MultiE-Comm</title>
 
     <!-- jQuery -->
-    <script src="<?php echo base_url("assets/js/jquery-3.1.1.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/jquery-3.2.1.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/ext/moment.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/ext/transition.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/ext/bootstrap-collapse.js"); ?>"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="<?php echo base_url("assets/js/bootstrap.min.js"); ?>"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script type="text/javascript" src="<?php echo base_url("assets/js/plugins/morris/raphael.min.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/plugins/morris/morris.min.js"); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/plugins/morris/morris-data.js"); ?>"></script>
+
+    <!-- External DatePicker JavaScript -->
+    <script src="<?php echo base_url("assets/js/ext/bootstrap-datepicker.js"); ?>"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url("assets/css/sb-admin.css"); ?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/ext/bootstrap-datetimepicker.css"); ?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/ext/bootstrap-datetimepicker.min.css"); ?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/ext/datepicker.css"); ?>" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="<?php echo base_url("assets/css/plugins/morris.css"); ?>" rel="stylesheet">
@@ -30,11 +47,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdxz4UYsbPHqdXW4syGL29cDvsuD19Gs0&callback=initMap"
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdxz4UYsbPHqdXW4syGL29cDvsuD19Gs0&callback="
             type="text/javascript"></script>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
@@ -62,12 +79,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $(this).addClass("active");
                 $(".container-fluid").load("Setting",function(){}).hide().fadeIn('slow');
             });
-            // Monthly Reports
-            $( "#monthly" ).click(function() {
-                $(".collapse .active").removeClass("active");
-                $(this).addClass("active");
-                $(".container-fluid").load("Report/Monthly",function(){}).hide().fadeIn('slow');
-            });
+//            // Monthly Reports
+//            $( "#monthly" ).click(function() {
+//                $(".collapse .active").removeClass("active");
+//                $(this).addClass("active");
+//                $(".container-fluid").load("Report/Monthly",function(){}).hide().fadeIn('slow');
+//            });
             // Weekly Reports
             $( "#weekly" ).click(function() {
                 $(".collapse .active").removeClass("active");
@@ -80,6 +97,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $(".collapse .active").removeClass("active");
                 $(this).addClass("active");
                 $(".container-fluid").load("Contact",function(){}).hide().fadeIn('slow');
+            });
+
+            // profile page
+            $( "#userprofile" ).click(function() {
+                $(".container-fluid").load("UserProfile",function(){}).hide().fadeIn('slow');
             });
         });
     </script>
@@ -99,97 +121,97 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
+<!--        <li class="dropdown">-->
+<!--            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>-->
+<!--            <ul class="dropdown-menu message-dropdown">-->
+<!--                <li class="message-preview">-->
+<!--                    <a href="#">-->
+<!--                        <div class="media">-->
+<!--                                        <span class="pull-left">-->
+<!--                                            <img class="media-object" src="http://placehold.it/50x50" alt="">-->
+<!--                                        </span>-->
+<!--                            <div class="media-body">-->
+<!--                                <h5 class="media-heading"><strong>--><?php //echo $firstname ?><!--</strong>-->
+<!--                                </h5>-->
+<!--                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>-->
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur...</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="message-preview">-->
+<!--                    <a href="#">-->
+<!--                        <div class="media">-->
+<!--                                        <span class="pull-left">-->
+<!--                                            <img class="media-object" src="http://placehold.it/50x50" alt="">-->
+<!--                                        </span>-->
+<!--                            <div class="media-body">-->
+<!--                                <h5 class="media-heading"><strong>--><?php //echo $firstname ?><!--</strong>-->
+<!--                                </h5>-->
+<!--                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>-->
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur...</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="message-preview">-->
+<!--                    <a href="#">-->
+<!--                        <div class="media">-->
+<!--                                        <span class="pull-left">-->
+<!--                                            <img class="media-object" src="http://placehold.it/50x50" alt="">-->
+<!--                                        </span>-->
+<!--                            <div class="media-body">-->
+<!--                                <h5 class="media-heading"><strong>--><?php //echo $firstname ?><!--</strong>-->
+<!--                                </h5>-->
+<!--                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>-->
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur...</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="message-footer">-->
+<!--                    <a href="#">Read All New Messages</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--        <li class="dropdown">-->
+<!--            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>-->
+<!--            <ul class="dropdown-menu alert-dropdown">-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li class="divider"></li>-->
+<!--                <li>-->
+<!--                    <a href="#">View All</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </li>-->
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-            <ul class="dropdown-menu message-dropdown">
-                <li class="message-preview">
-                    <a href="#">
-                        <div class="media">
-                                        <span class="pull-left">
-                                            <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                        </span>
-                            <div class="media-body">
-                                <h5 class="media-heading"><strong><?php echo $firstname ?></strong>
-                                </h5>
-                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="message-preview">
-                    <a href="#">
-                        <div class="media">
-                                        <span class="pull-left">
-                                            <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                        </span>
-                            <div class="media-body">
-                                <h5 class="media-heading"><strong><?php echo $firstname ?></strong>
-                                </h5>
-                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="message-preview">
-                    <a href="#">
-                        <div class="media">
-                                        <span class="pull-left">
-                                            <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                        </span>
-                            <div class="media-body">
-                                <h5 class="media-heading"><strong><?php echo $firstname ?></strong>
-                                </h5>
-                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="message-footer">
-                    <a href="#">Read All New Messages</a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-            <ul class="dropdown-menu alert-dropdown">
-                <li>
-                    <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">View All</a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><?php echo "&nbsp;".$firstname ?> <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo "&nbsp;".$firstname ?> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-user"></i> User Profile</a>
+                <li id="userprofile" style="cursor: pointer;">
+                    <a><i class="fa fa-fw fa-user"></i> User Profile</a>
                 </li>
                 <!--                        <li>-->
                 <!--                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>-->
                 <!--                        </li>-->
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-gear"></i> User Settings</a>
+                    <a href="Landing"><i class="fa fa-fw fa-home"></i> Homepage</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -223,11 +245,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-file"></i> Analytic Reports <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="demo" class="collapse">
                     <li id="weekly" style="cursor: pointer;">
-                        <a>Weekly Report</a>
+                        <a>Report</a>
                     </li>
-                    <li id="monthly" style="cursor: pointer;">
-                        <a>Monthly Report</a>
-                    </li>
+<!--                    <li id="monthly" style="cursor: pointer;">-->
+<!--                        <a>Monthly Report</a>-->
+<!--                    </li>-->
                 </ul>
             </li>
 

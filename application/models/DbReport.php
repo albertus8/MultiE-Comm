@@ -10,30 +10,47 @@ Class DbReport extends CI_Model
     {
         parent::__construct();
     }
-    function getReportDataWeekly($iduser)
+    function getReportDataWeekly($iduser, $getData)
     {
-        $lastDay = new DateTime( '2017-02-12' );
-        $firstDay = new DateTime( '2017-02-12' );
+        $lastDay = new DateTime("01-".$getData["selectMonth"]);
+        $firstDay = new DateTime("01-".$getData["selectMonth"]);
         $temp_first = $firstDay->format( 'Y-m-01' );
         $temp_date = $lastDay->format( 'Y-m-t' );
-//        var_dump($temp_first);
+//        print_r($temp_first);
+//        print_r($temp_date);
 
-        $this->db->select('ID_user, TGL_BELI, NAMA_TOKO, SUM(TOTAL_PENJUALAN) AS TOTAL_PENJUALAN');
+        $where_nama_toko = "";
+
+        for($i = 0; $i < count($getData["selectToko"]); $i++){
+            $where_nama_toko .= " NAMA_TOKO = '".strtoupper($getData["selectToko"][$i]) . "' OR";
+        }
+
+        $where_nama_toko = substr($where_nama_toko, 0, -2);
+
+//        $where_nama_toko .= " AND TGL_BELI BETWEEN ". $temp_first ." AND ". $temp_date;
+
+        $this->db->select('ID_DPENJUALAN, ID_user, TGL_BELI, NAMA_TOKO, SUM(TOTAL_PENJUALAN) AS TOTAL_PENJUALAN');
         $this->db->from('data_penjualan');
         $this->db->where('ID_user', $iduser);
-        $this->db->where("(TGL_BELI BETWEEN '$temp_first' and '$temp_date')");
+        $this->db->where("(".$where_nama_toko.")");
+
+        $this->db->where("TGL_BELI BETWEEN '$temp_first' and '$temp_date'");
+
         $this->db->group_by('NAMA_TOKO');
         $this->db->order_by('NAMA_TOKO');
         $query = $this->db->get();
+
+//        print_r($query);
+//        exit;
 
         if($query -> num_rows() > 0)
         {
             foreach ($query->result() as $row)
             {
                 $data[] = array(
-                     "Tanggal"    => $row->TGL_BELI,
-                     "Nama Toko"    => $row->NAMA_TOKO,
-//                    "ID"        => $row->ID_DPENJUALAN,
+                    "ID"        => $row->ID_DPENJUALAN,
+                    "Nama Toko"    => $row->NAMA_TOKO,
+                    "Tanggal"    => $row->TGL_BELI,
 //                    "Tanggal"    => date('D', strtotime($row->TGL_BELI)), //date format
                     "Penjualan" => $row->TOTAL_PENJUALAN
                 );

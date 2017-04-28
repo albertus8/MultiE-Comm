@@ -20,13 +20,14 @@ class Register extends CI_Controller {
         $data = [];
         $data['ID_user'] = '';
         $data['username'] = '';
+        $data['email'] = '';
         $data['password'] = '';
         $data['confirmpassword'] = '';
         $data['firstname'] = '';
         $data['lastname'] = '';
         $data['joindate'] = '';
 
-        if($this->input->post("registerBtn")){
+        if($this->input->post("submitReg")){
             $this->form_validation->set_rules('username', 'Username', 'trim|required');
            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[12]');
            $this->form_validation->set_rules('confirmpassword', 'ConfirmPassword', 'trim|required|min_length[4]|max_length[12]');
@@ -38,9 +39,10 @@ class Register extends CI_Controller {
                     array(
                         'username' => $this->input->post('username'),
                         'password' => $this->input->post('password'),
+                        'email' => $this->input->post('email'),
                         'firstname' => $this->input->post('firstname'),
                         'lastname' => $this->input->post('lastname'),
-                        'joindate' => "",
+                        'joindate' => date("Y-m-d H:i:s"),
                         'remember_toogle' => 0,
                         'userLevel' => 3,
                         'enabledToggle' => 0,
@@ -55,7 +57,7 @@ class Register extends CI_Controller {
 //                print_r($getDataArray);
 //                echo "</pre>";
 
-                redirect('', 'refresh');
+                redirect('Login', 'refresh');
             }
         }
 

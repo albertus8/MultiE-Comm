@@ -55,6 +55,11 @@
                         echo form_input("username",$username,"placeholder='Enter Username Here' class='form-control input-md'");
                         echo "</div>";
                         echo "<div class='form-group'>";
+                        echo "<label for='email'>Email :</label>";
+                        //                        echo "<input type='password' class='form-control' name='inputPassword' id='inputPassword' placeholder='Enter Password here' />";
+                        echo form_input("email",$email,"placeholder='Enter Email Here' class='form-control input-md'");
+                        echo "</div>";
+                        echo "<div class='form-group'>";
                         echo "<label for='password'>Password :</label>";
 //                        echo "<input type='password' class='form-control' name='inputPassword' id='inputPassword' placeholder='Enter Password here' />";
                         echo form_password("password",$password,"placeholder='Enter Password here' class='form-control input-md'");
@@ -77,6 +82,9 @@
                         echo "<div class='form-group'>";
 //                        echo "<button type='button' class='btn btn-primary btn-block' id='submitData'>Register Now!</button>";
                             echo form_submit('registerBtn', 'Register', 'class="btn btn-info btn-sm" style="width: 100%;');
+                        echo "</div>";
+                        echo "<div class='form-group'>";
+                        echo form_submit('submitReg', 'Register Now', 'class="btn btn-info btn-sm pull-right"');
                         echo "</div>";
                         echo form_close();
                         ?>

@@ -60,8 +60,11 @@ Class DbTables extends CI_Model
     }
 
     function getNamaToko(){
+        $session_id = $this->session->userdata('loginData');
+
         $this->db->select("NAMA_TOKO");
         $this->db->from('data_penjualan');
+        $this->db->where('ID_user',$session_id["ID_user"]);
         $this->db->group_by('NAMA_TOKO');
         $query = $this->db->get();
 //        echo "<pre>";
@@ -84,6 +87,8 @@ Class DbTables extends CI_Model
     }
 
     function getDetailPenjualan(){
+        $session_id = $this->session->userdata('loginData');
+
         $this->db->select("*");
         $this->db->from('d_data_penjualan');
         $query = $this->db->get();
@@ -113,8 +118,10 @@ Class DbTables extends CI_Model
     }
 
     function getTableTransaction(){
+        $session_id = $this->session->userdata('loginData');
         $this->db->select("*");
         $this->db->from('data_transaksi');
+//        $this->db->where('ID_user',$session_id["ID_user"]);
         $query = $this->db->get();
 
         if($query -> num_rows() > 0)
@@ -140,8 +147,10 @@ Class DbTables extends CI_Model
     }
 
     function getConfirmedData(){
+        $session_id = $this->session->userdata('loginData');
         $this->db->select("*");
         $this->db->from('data_transaksi');
+//        $this->db->where('ID_user',$session_id["ID_user"]);
         $this->db->where("(CONFIRMED='0' and ENABLE='1')");
         $queryA = $this->db->get();
         $data = [];
