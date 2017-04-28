@@ -83,6 +83,9 @@
 //                        echo "<button type='button' class='btn btn-primary btn-block' id='submitData'>Register Now!</button>";
                             echo form_submit('registerBtn', 'Register', 'class="btn btn-info btn-sm" style="width: 100%;');
                         echo "</div>";
+                        echo "<div class='form-group'>";
+                        echo form_submit('submitReg', 'Register Now', 'class="btn btn-info btn-sm pull-right"');
+                        echo "</div>";
                         echo form_close();
                         ?>
                     </div>

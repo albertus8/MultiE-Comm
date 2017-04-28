@@ -83,7 +83,6 @@ class Report extends CI_Controller {
                     echo "<table class=\"table table-bordered table-hover\">";
                         echo "<thead>";
                             echo "<tr>";
-                                echo "<th>Kode Transaksi</th>";
                                 echo "<th>Kode</th>";
                                 echo "<th>Nama</th>";
                                 echo "<th>Jenis</th>";
@@ -96,7 +95,6 @@ class Report extends CI_Controller {
                                 for ($k = 0; $k < count($getDetailedData); $k++){
                                     echo "<tr>";
                                     if($getDetailedData[$k]["ID"] == $data[0]["ID"]){
-                                        echo "<td>".$getDetailedData[$k]["ID"]."</td>";
                                         echo "<td>".$getDetailedData[$k]["ID Barang"]."</td>";
                                         echo "<td>".$getDetailedData[$k]["Nama Barang"]."</td>";
                                         echo "<td class='text-center'>".$getDetailedData[$k]["Jenis"]."</td>";
@@ -107,7 +105,7 @@ class Report extends CI_Controller {
                                     echo "</tr>";
                                 }
                             echo "<tr>";
-                                echo "<td colspan='5' class='text-center'><b>TOTAL</b></td>";
+                                echo "<td colspan='4' class='text-center'><b>TOTAL</b></td>";
                                 echo "<td colspan='2' class='text-right' style='white-space:pre;width: 20px'><b>IDR". str_pad(number_format($data[0]['Penjualan'],2,',','.'),60 ," ",STR_PAD_LEFT) ."</b></td>";
                             echo "</tr>";
                         echo "</tbody>";
@@ -124,7 +122,6 @@ class Report extends CI_Controller {
                         echo "<table class=\"table table-bordered table-hover\">";
                             echo "<thead>";
                                 echo "<tr>";
-                                    echo "<th>Kode Transaksi</th>";
                                     echo "<th>Kode</th>";
                                     echo "<th>Nama</th>";
                                     echo "<th>Jenis</th>";
@@ -138,7 +135,6 @@ class Report extends CI_Controller {
                                     for ($m = 0; $m < count($getDetailedData); $m++){
                                         echo "<tr>";
                                         if($getDetailedData[$m]["ID"] == $data[$j]["ID"]){
-                                            echo "<td>".$getDetailedData[$m]["ID"]."</td>";
                                             echo "<td>".$getDetailedData[$m]["ID Barang"]."</td>";
                                             echo "<td>".$getDetailedData[$m]["Nama Barang"]."</td>";
                                             echo "<td class='text-center'>".$getDetailedData[$m]["Jenis"]."</td>";
@@ -149,7 +145,7 @@ class Report extends CI_Controller {
                                         echo "</tr>";
                                     }
                                     echo "<tr>";
-                                        echo "<td colspan='5' class='text-center'><b>TOTAL</b></td>";
+                                        echo "<td colspan='4' class='text-center'><b>TOTAL</b></td>";
                                         echo "<td colspan='2' class='text-right' style='white-space:pre;width: 20px'><b>IDR". str_pad(number_format($data[$j]['Penjualan'],2,',','.'),60 ," ",STR_PAD_LEFT) ."</b></td>";
                                     echo "</tr>";
                             echo "</tbody>";

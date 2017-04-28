@@ -79,12 +79,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $(this).addClass("active");
                 $(".container-fluid").load("Setting",function(){}).hide().fadeIn('slow');
             });
-            // Monthly Reports
-            $( "#monthly" ).click(function() {
-                $(".collapse .active").removeClass("active");
-                $(this).addClass("active");
-                $(".container-fluid").load("Report/Monthly",function(){}).hide().fadeIn('slow');
-            });
+//            // Monthly Reports
+//            $( "#monthly" ).click(function() {
+//                $(".collapse .active").removeClass("active");
+//                $(this).addClass("active");
+//                $(".container-fluid").load("Report/Monthly",function(){}).hide().fadeIn('slow');
+//            });
             // Weekly Reports
             $( "#weekly" ).click(function() {
                 $(".collapse .active").removeClass("active");
@@ -121,88 +121,88 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
+<!--        <li class="dropdown">-->
+<!--            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>-->
+<!--            <ul class="dropdown-menu message-dropdown">-->
+<!--                <li class="message-preview">-->
+<!--                    <a href="#">-->
+<!--                        <div class="media">-->
+<!--                                        <span class="pull-left">-->
+<!--                                            <img class="media-object" src="http://placehold.it/50x50" alt="">-->
+<!--                                        </span>-->
+<!--                            <div class="media-body">-->
+<!--                                <h5 class="media-heading"><strong>--><?php //echo $firstname ?><!--</strong>-->
+<!--                                </h5>-->
+<!--                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>-->
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur...</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="message-preview">-->
+<!--                    <a href="#">-->
+<!--                        <div class="media">-->
+<!--                                        <span class="pull-left">-->
+<!--                                            <img class="media-object" src="http://placehold.it/50x50" alt="">-->
+<!--                                        </span>-->
+<!--                            <div class="media-body">-->
+<!--                                <h5 class="media-heading"><strong>--><?php //echo $firstname ?><!--</strong>-->
+<!--                                </h5>-->
+<!--                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>-->
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur...</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="message-preview">-->
+<!--                    <a href="#">-->
+<!--                        <div class="media">-->
+<!--                                        <span class="pull-left">-->
+<!--                                            <img class="media-object" src="http://placehold.it/50x50" alt="">-->
+<!--                                        </span>-->
+<!--                            <div class="media-body">-->
+<!--                                <h5 class="media-heading"><strong>--><?php //echo $firstname ?><!--</strong>-->
+<!--                                </h5>-->
+<!--                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>-->
+<!--                                <p>Lorem ipsum dolor sit amet, consectetur...</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                <li class="message-footer">-->
+<!--                    <a href="#">Read All New Messages</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--        <li class="dropdown">-->
+<!--            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>-->
+<!--            <ul class="dropdown-menu alert-dropdown">-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>-->
+<!--                </li>-->
+<!--                <li class="divider"></li>-->
+<!--                <li>-->
+<!--                    <a href="#">View All</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </li>-->
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-            <ul class="dropdown-menu message-dropdown">
-                <li class="message-preview">
-                    <a href="#">
-                        <div class="media">
-                                        <span class="pull-left">
-                                            <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                        </span>
-                            <div class="media-body">
-                                <h5 class="media-heading"><strong><?php echo $firstname ?></strong>
-                                </h5>
-                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="message-preview">
-                    <a href="#">
-                        <div class="media">
-                                        <span class="pull-left">
-                                            <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                        </span>
-                            <div class="media-body">
-                                <h5 class="media-heading"><strong><?php echo $firstname ?></strong>
-                                </h5>
-                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="message-preview">
-                    <a href="#">
-                        <div class="media">
-                                        <span class="pull-left">
-                                            <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                        </span>
-                            <div class="media-body">
-                                <h5 class="media-heading"><strong><?php echo $firstname ?></strong>
-                                </h5>
-                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="message-footer">
-                    <a href="#">Read All New Messages</a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-            <ul class="dropdown-menu alert-dropdown">
-                <li>
-                    <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">View All</a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><?php echo "&nbsp;".$firstname ?> <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo "&nbsp;".$firstname ?> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li id="userprofile" style="cursor: pointer;">
                     <a><i class="fa fa-fw fa-user"></i> User Profile</a>
@@ -210,9 +210,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!--                        <li>-->
                 <!--                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>-->
                 <!--                        </li>-->
-<!--                <li>-->
-<!--                    <a href="#"><i class="fa fa-fw fa-gear"></i> User Settings</a>-->
-<!--                </li>-->
+                <li>
+                    <a href="Landing"><i class="fa fa-fw fa-home"></i> Homepage</a>
+                </li>
                 <li class="divider"></li>
                 <li>
                     <a href="Logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
@@ -245,11 +245,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-file"></i> Analytic Reports <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="demo" class="collapse">
                     <li id="weekly" style="cursor: pointer;">
-                        <a>Weekly Report</a>
+                        <a>Report</a>
                     </li>
-                    <li id="monthly" style="cursor: pointer;">
-                        <a>Monthly Report</a>
-                    </li>
+<!--                    <li id="monthly" style="cursor: pointer;">-->
+<!--                        <a>Monthly Report</a>-->
+<!--                    </li>-->
                 </ul>
             </li>
 

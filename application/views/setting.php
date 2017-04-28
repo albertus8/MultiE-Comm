@@ -5,7 +5,7 @@
  * on Feb 2017.
  */
 ?>
-<script type="text/javascript">
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html">
     var catchFile="";
     var formData = new FormData();
     $('input[type="file"]').change(function(){
@@ -53,12 +53,13 @@
                     //Do something success-ish
                     if(result){
                         $('#myModal').modal('toggle');
+                        $('.modal-body').find('#targetView').html(result);
                     }
                     else {
 
                         $(".alert.alert-danger").fadeIn("slow");
                     }
-//                    console.log(result);
+                    console.log(result);
                 }
             });
         }
@@ -103,33 +104,225 @@
                     <center><i class="fa fa-info-circle"></i>  <strong>Oops!</strong> It seems you caught an error. Try it again!</center>
                 </div>
                 <div class="panel-body">
-                        <div class="col-lg-12">
-                            <div class="col-lg-6">
-                                <div class="input-group">
-                                    <label class="input-group-btn">
-                                        <span class="btn btn-primary">
-                                            Browse&hellip; <input type="file" id="selectFile" accept=".json, .xml" style="display: none;" multiple>
-                                        </span>
-                                    </label>
-                                    <input type="text" id="targetText" class="form-control text-right" readonly>
-                                </div>
-                                <button type="button" class="btn btn-primary btn-block" id="submitFile">Submit Data</button>
-                            </div>
-                            <div class="col-lg-6"></div>
-                        </div>
-                    <div class="col-lg-12">
-                        <div class="col-lg-6 target">
-
+                    <div class="col-lg-6 pull-left">
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong> Ada langkah yang dibutuhkan untuk upload data, yakni: <br />
+                            &nbsp; &nbsp; &nbsp; 1. Tipe file hanya diperbolehkan .json atau .xml <br />
+                            &nbsp; &nbsp; &nbsp; 2. Penulisan isi file harus sesuai dengan format <br />
+                            &nbsp; &nbsp; &nbsp; 3. Perhatikan tipe data yang digunakan <br />
+                            &nbsp; &nbsp; &nbsp; 4. Hanya dapat upload satu data dalam satu waktu
                         </div>
                     </div>
-<!--                    <div class="col-lg-6">-->
-<!--                        <input id="inputFile" name="inputFile[]" type="file" multiple class="file-loading">-->
-<!--                        <div id="input-error-2" style="margin-top:10px;display:none"></div>-->
-<!--                        <div id="input-success-2" class="alert alert-success fade in" style="margin-top:10px;display:none"></div>-->
-<!--                    </div>-->
-                </div>
+                    <div class="col-lg-6 pull-right">
+                        <div class="alert alert-warning">
+                            <strong>Tipe Data</strong>
+                            <hr>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Nama Field</th>
+                                        <th>Tipe Data (Chr.)</th>
+                                        <th class="text-center">Null</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>ID_BARANG</td>
+                                        <td>varchar(14)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NAMA_BARANG</td>
+                                        <td>varchar(64)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>JENIS_BARANG</td>
+                                        <td>varchar(64)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>QUANTITY_BARANG</td>
+                                        <td>int(4)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HARGA_PER_SATUAN_BARANG</td>
+                                        <td>int(9)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Nama Field</th>
+                                        <th>Tipe Data (Chr.)</th>
+                                        <th class="text-center">Null</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>ID_DPENJUALAN</td>
+                                        <td>varchar(14)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NAMA_TOKO</td>
+                                        <td>varchar(64)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TGL_BELI</td>
+                                        <td>date</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TOTAL_PENJUALAN</td>
+                                        <td>int(9)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Nama Field</th>
+                                        <th>Tipe Data (Chr.)</th>
+                                        <th class="text-center">Null</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>ID_DPENJUALAN</td>
+                                        <td>varchar(14)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ID_BARANG</td>
+                                        <td>varchar(14)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NAMA_BARANG</td>
+                                        <td>varchar(64)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>JENIS_BARANG</td>
+                                        <td>varchar(64)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>QUANTITY_BARANG</td>
+                                        <td>int(4)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HARGA_PER_SATUAN_BARANG</td>
+                                        <td>int(9)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SUBTOTAL_PER_BARANG</td>
+                                        <td>int(9)</td>
+                                        <td class="text-center">No</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pull-left">
+                        <strong>Contoh Penulisan Json</strong>
+        <pre>
+            [
+                {
+                    "id barang":"BC270417000002",
+                    "nama barang":"GTX 1050 ZOTAC",
+                    "jenis":"GPU",
+                    "quantity":"19",
+                    "harga satuan":"2100000"
+                },
+                {
+                    "id barang":"BC270417000004",
+                    "nama barang":"Mi Gamepad",
+                    "jenis":"Accesories",
+                    "quantity":"21",
+                    "harga satuan":"250000"
+                }
+            ]
+        </pre>
+                    </div>
+                    <div class="col-lg-6 pull-left">
+                        <strong>Contoh Penulisan Xml</strong>
+                        <pre>
+                            <xmp>
+            <root>
+                <data>
+                    <idbarang>BC270417000002</idbarang>
+                    <namabarang>GTX 1050 ZOTAC</namabarang>
+                    <jenis>GPU</jenis>
+                    <quantity>19</quantity>
+                    <hargasatuan>2100000</hargasatuan>
+                </data>
+                <data>
+                    <idbarang>BC270417000004</idbarang>
+                    <namabarang>Mi Gamepad</namabarang>
+                    <jenis>Accesories</jenis>
+                    <quantity>19</quantity>
+                    <hargasatuan>250000</hargasatuan>
+                </data>
+            </root>
+                            </xmp>
+                        </pre>
+                    </div>
 
+
+
+                </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label> Select Data : </label>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                        <span class="btn btn-primary">
+                                            Browse&hellip; <input type="file" id="selectFile" accept=".json, .xml" style="display: none;">
+                                        </span>
+                            </label>
+                            <input type="text" id="targetText" class="form-control text-right" readonly>
+                        </div>
+                        <hr>
+                        <button type="button" class="btn btn-primary btn-block" id="submitFile">Submit Data</button>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label> File History : </label>
+                        </div>
+                        <ul>
+                            <?php
+                            for($i=0;$i<count($data);$i++){
+                                echo "<li>".$data[$i]. "</li>";
+                            }
+                            ?>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 <div id="myModal" class="modal fade" role="dialog" aria-hidden="true">

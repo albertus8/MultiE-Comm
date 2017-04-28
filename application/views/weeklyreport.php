@@ -101,14 +101,14 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Reports <small>Weekly</small>
+                Reports
             </h1>
             <ol class="breadcrumb">
                 <li>
                     <i class="fa fa-dashboard"></i>  <a href="Home">Dashboard</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-fw fa-file"></i> Weekly Reports
+                    <i class="fa fa-fw fa-file"></i> Report
                 </li>
             </ol>
         </div>
@@ -118,7 +118,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Weekly Report</h3>
+                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Report</h3>
                 </div>
                 <div class="panel-body">
                     <div class="col-lg-12">

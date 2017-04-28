@@ -133,7 +133,7 @@ class Subscriber extends CI_Controller
                 'password' => $getData[1],
                 'firstname' => $getData[3],
                 'lastname' => $getData[4],
-                'joindate' => "",
+                'joindate' => date("Y-m-d H:i:s"),
                 'remember_toogle' => 0,
                 'userLevel' => 3,
                 'enabledToggle' => 0,
