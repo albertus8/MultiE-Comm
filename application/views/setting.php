@@ -243,15 +243,15 @@
         <pre>
             [
                 {
-                    "id barang":"BC270417000002",
-                    "nama barang":"GTX 1050 ZOTAC",
+                    "idbarang":"BC270417000002",
+                    "namabarang":"GTX 1050 ZOTAC",
                     "jenis":"GPU",
                     "quantity":"19",
                     "harga satuan":"2100000"
                 },
                 {
-                    "id barang":"BC270417000004",
-                    "nama barang":"Mi Gamepad",
+                    "idbarang":"BC270417000004",
+                    "namabarang":"Mi Gamepad",
                     "jenis":"Accesories",
                     "quantity":"21",
                     "harga satuan":"250000"
