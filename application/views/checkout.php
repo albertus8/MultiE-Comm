@@ -36,6 +36,10 @@
                 width: 100%;
             }
         }
+
+        textarea {
+            resize: none;
+        }
     </style>
 
     <script type="text/javascript">
@@ -63,14 +67,47 @@
                 });
             });
             $('#toRegister').click(function(){
+
                 $.ajax({
                     url: 'Checkout/extFrom',
+                    data: {"data" : intInput},
                     type: 'post',
                     success: function(result) {
                         window.location.href = 'Login';
                     }
                 });
             });
+
+            $('#toPayment').click(function(){
+                window.location.href = 'Payment';
+            });
+
+            var intInput = 0;
+            $(':input[type="number"]').change(function() {
+                intInput = $("#inputJumlahItem").val();
+//                $.post("Checkout/jumlahInput", {intInput: intInput});
+                $.ajax({
+                    url: 'Checkout/jumlahInput',
+                    data: {"data" : intInput},
+                    type: 'post',
+                    success: function(result) {
+//                        console.log(result);
+                        $("#targetSubtotal").html(result);
+                        $("#targetTotal").html("<b>"+result+"</b>");
+                    }
+                });
+                console.log();
+            });
+
+//            var inputJumlahItem = $("#inputJumlahItem").val();
+//            $("#inputJumlahItem").on('keyup change click', function () {
+////                if(this.inputJumlahItem !== inputJumlahItem) {
+////                    inputJumlahItem = this.inputJumlahItem;
+////                    //Do stuff
+////
+////                }
+//
+//            });
         });
     </script>
 </head>
@@ -91,13 +128,13 @@
                     <a class="nav-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="paymentBrd" href="#payment">Payment</a>
+                    <a class="nav-link" id="paymentBrd" href="Payment">Payment</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="confirmationBrd" href="#confirmation">Confirmation</a>
+                    <a class="nav-link" id="confirmationBrd" href="Confirmation">Confirmation</a>
                 </li>
             </ul>
         </div>
@@ -105,7 +142,7 @@
 </nav>
 
 <!-- Team -->
-<section id="review">
+<section id="review" class="bg-faded">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center" id="extFrom">
@@ -126,64 +163,105 @@
             </div>
         </div>
 
-
         <div class="row">
-            <div class="col-sm-12">
-                <div class="team-member">
-<!--                    <img class="mx-auto rounded-circle" src="img/team/Untitled-1.jpg" alt="">-->
-
-                   <?php
+            <div class="col-lg-6" style="">
+                <div class="table-responsive table-sm">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Item</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
                         if(!$package){
-                            ?>
-                            <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <?php
-
-                            echo "<h4>Free</h4>";
+                        ?>
+                            <tr>
+                                <td class="text-center">
+                                    <span class="fa-stack fa-2x">
+                                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                        <i class="fa fa-shopping-cart fa-stack fa-inverse"></i>
+                                    </span>
+                                    <h4>Free</h4>
+                                    <?php echo "<h4>".$package['Nama Paket']."</h4>"; ?>
+                                    <p class="text-muted">IDR <?php echo number_format("0",2,',','.'); ?> /month</p>
+                                </td>
+                                <td class="text-center" style="vertical-align: middle;">
+                                    <p class="text-muted">indefinitely</p>
+                                </td>
+                                <td class="text-right" style="vertical-align: middle;">
+                                    <p class="text-muted">IDR <?php echo number_format("0",2,',','.'); ?> </p>
+                                </td>
+                            </tr>
+                        <?php
                         }else{
-                            ?>
-                            <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <?php
-                            echo "<h4>".$package['Nama Paket']."</h4>";
+                        ?>
+                            <tr>
+                                <td class="text-center" style="width: 200px;vertical-align: middle;">
+                                    <span class="fa-stack fa-2x">
+                                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                    <?php echo "<h4>".$package['Nama Paket']."</h4>"; ?>
+                                    <p class="text-muted">IDR <?php echo number_format($package['Harga'],2,',','.'); ?> /month</p>
+                                </td>
+                                <td class="text-center" style="vertical-align: middle;">
+                                    <input type='number' class='form-control' name='inputJumlahItem' id='inputJumlahItem' min="1" placeholder='eg. 1' style="text-align:center;" />
+                                </td>
+                                <td class="text-right" style="width: 200px; vertical-align: middle;" id="targetSubtotal">
+                                    IDR <?php echo number_format($package['Harga'],2,',','.'); ?>
+                                </td>
+                            </tr>
+                        <?php
+//                            echo "<h4>".$package['Nama Paket']."</h4>";
                         }
-                   ?>
-
-                    <p class="text-muted">IDR <?php echo number_format($package['Harga'],2,',','.'); ?> /month</p>
-                    <div class="control-group">
-                        <div class='input-group'>
-                            <input type='text' class='form-control' placeholder='Jumlah Bulan' id='inputBanyakBulan' />
+                        ?>
+                            <tr>
+                                <td colspan="2"><b>TOTAL</b</td>
+                                <td class="text-right" style="vertical-align: middle;" id="targetTotal"><b>IDR <?php echo number_format($package['Harga'],2,',','.'); ?></b</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-info-circle fa-fw"></i> Detail Informasi</h3>
+                        </div>
+                        <div class="control-group col-lg-12">
+<!--                            <p><label class="control-label">Berlanganan Paket --><?php //echo $package['Nama Paket']; ?><!--</label></p>-->
+<!--                            <p><label class="control-label">IDR --><?php //echo number_format($package['Harga'],2,',','.'); ?><!-- x 3 Bulan = <b>IDR --><?php //echo number_format($package['Harga']*3,2,',','.'); ?><!--</b></p>-->
+                            <div class='form-group'>
+                                 <label for='inputNama'>Nama Lengkap :</label>
+                                 <input type='text' class='form-control' name='inputNama' id='inputNama' placeholder='Isikan Nama Lengkap dengan benar eg. Bambang Susanto'/>
+                            </div>
+                            <div class='form-group'>
+                                 <label for='inputTelp'>No. Telp :</label>
+                                 <input type='text' class='form-control' name='inputTelp' id='inputTelp' placeholder='Isikan No. Telp dengan benar; eg. 08574350099'/>
+                            </div>
+                            <div class='form-group'>
+                                <label for='inputAlamat'>Alamat :</label>
+                                <textarea class="form-control" rows="5" id="inputAlamat" placeholder="Isikan Alamat dengan lengkap"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
+        <br />
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <p class="large text-muted"><i class="fa fa-quote-left" aria-hidden="true"></i> Please kindly to check the subscription you've chose. <i class="fa fa-quote-right" aria-hidden="true"></i> </p>
                 <p> - Admin</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-info-circle fa-fw"></i> Detail</h3>
-                    </div>
-                    <div class="control-group col-lg-6">
-                        <p><label class="control-label">Berlanganan Paket <?php echo $package['Nama Paket']; ?></label></p>
-                        <p><label class="control-label">IDR <?php echo number_format($package['Harga'],2,',','.'); ?> x 3 Bulan = <b>IDR <?php echo number_format($package['Harga']*3,2,',','.'); ?></b></p>
-                        <div class='input-group'>
-                            <input type='text' class='form-control' placeholder='Alamat Tujuan' id='inputAlamat' />
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row pull-right" style="justify-content: center;">
+            <button type="button" class="btn btn-xl" name="toPayment" id="toPayment" style="cursor: pointer;">ke Pembayaran <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+<!--            <input type="button" class="btn btn-xl" value="ke Pembayaran" name="toPayment" id="selectBtn" style="cursor: pointer;" />-->
         </div>
+
     </div>
 </section>
 

@@ -257,7 +257,7 @@
         </div>
     </section>
 
-<!--<!--     Portfolio Grid-->-->
+<!--     Portfolio Grid-->
 <!--    <section class="bg-faded" id="portfolio">-->
 <!--        <div class="container">-->
 <!--            <div class="row">-->
