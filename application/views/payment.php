@@ -240,13 +240,27 @@
                         <h3 class="panel-title"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Ringkasan Tagihan</h3>
                     </div>
                     <div class="panel-body">
-
+                        <?php
+                        if(!$checkoutData){
+                            ?>
                         <p>Paket <?php echo $paket['Nama Paket']; ?></p>
 <!--                        <div class="col-md-6 pull-left">--><?php //echo $checkoutData/(int)$paket['Harga']; ?><!-- bulan</div>-->
 <!--                        <div class="col-md-6 pull-right text-right"> --><?php //echo "IDR".str_pad(number_format($paket['Harga'],2,',','.'),20 ," ",STR_PAD_LEFT); ?><!--</div>-->
+                                <div class="col-lg-12"><?php echo (int)$dataDariDB['totalBayar']/(int)$dataDariDB['hargaPaket']; ?> bulan x <?php echo "IDR".str_pad(number_format((int)$dataDariDB['hargaPaket'],2,',','.'),20 ," ",STR_PAD_LEFT); ?><hr /></div>
+                                <div class="col-md-6 pull-left"><b>Total Transaksi</b></div>
+
+
+                                <div class="col-md-6 pull-right text-right"><b> <?php echo "IDR".str_pad(number_format($dataDariDB['totalBayar'],2,',','.'),20 ," ",STR_PAD_LEFT); ?></b></div>
+                                <?php
+                            }else{
+                                ?>
                                 <div class="col-lg-12"><?php echo $checkoutData/(int)$paket['Harga']; ?> bulan x <?php echo "IDR".str_pad(number_format($paket['Harga'],2,',','.'),20 ," ",STR_PAD_LEFT); ?><hr /></div>
-                        <div class="col-md-6 pull-left"><b>Total Transaksi</b></div>
-                        <div class="col-md-6 pull-right text-right"><b> <?php echo "IDR".str_pad(number_format($checkoutData,2,',','.'),20 ," ",STR_PAD_LEFT); ?></b></div>
+                                <div class="col-md-6 pull-left"><b>Total Transaksi</b></div>
+                                <div class="col-md-6 pull-right text-right"><b> <?php echo "IDR".str_pad(number_format($checkoutData,2,',','.'),20 ," ",STR_PAD_LEFT); ?></b></div>
+                                <?php
+                            }
+                        ?>
+<!--                        <div class="col-md-6 pull-right text-right"><b> --><?php //echo "IDR".str_pad(number_format($checkoutData,2,',','.'),20 ," ",STR_PAD_LEFT); ?><!--</b></div>-->
 
 <!--                            Item = --><?php //echo $paket['Nama Paket']; ?><!-- <br />-->
 <!--                            Satuan = --><?php //echo $paket['Harga']; ?><!-- <br />-->

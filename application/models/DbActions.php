@@ -179,6 +179,7 @@ Class DbActions extends CI_Model
             $data = array(
                 array(
                     'ID_user' => $ID_user,
+                    'email' => $getDataArray["0"]["email"],
                     'username' => $getDataArray["0"]["username"],
                     'password' => $hashedPass,
                     'firstname' => ucfirst($getDataArray["0"]["firstname"]),

@@ -10,9 +10,6 @@
     var formData = new FormData();
     $('input[type="file"]').change(function(){
         catchFile = $('#targetText').val($(this).val().replace(/.*(\/|\\)/, ''));
-
-//        formData.append('file', catchFile);
-//        alert("A file has been selected.");
     });
 
     $('#submitFile').on('click', function(){
@@ -295,9 +292,9 @@
                         </div>
                         <div class="input-group">
                             <label class="input-group-btn">
-                                        <span class="btn btn-primary">
-                                            Browse&hellip; <input type="file" id="selectFile" accept=".json, .xml" style="display: none;">
-                                        </span>
+                                <span class="btn btn-primary">
+                                    Browse&hellip; <input type="file" id="selectFile" accept=".json, .xml" style="display: none;">
+                                </span>
                             </label>
                             <input type="text" id="targetText" class="form-control text-right" readonly>
                         </div>

@@ -244,7 +244,7 @@
                                 <th>Nama Paket</th>
                                 <!--                                    <th class='text-center'>Tanggal</th>-->
                                 <th class='text-center'>Harga</th>
-                                <th>Detail</th>
+<!--                                <th>Detail</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -255,7 +255,7 @@
                                     echo "<td>".$data[$j]['ID']."</td>";
                                     echo "<td>".$data[$j]['Nama Paket']."</td>";
                                     echo "<td class='text-right' style='white-space:pre;width: 20px'>IDR".str_pad(number_format($data[$j]['Harga'],2,',','.'),20 ," ",STR_PAD_LEFT)."</td>";
-                                    echo "<td>".$data[$j]['Detail']."</td>";
+//                                    echo "<td>".$data[$j]['Detail']."</td>";
                                     echo "</tr>";
                                 }
                             }

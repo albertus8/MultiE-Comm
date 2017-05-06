@@ -25,4 +25,8 @@ class Transaction extends CI_Controller
         $response['status'] = $confirm;
         $this->load->view('transaction', $response);
     }
+    function acceptTransaction(){
+        $data = $this->input->post('data');
+        $this->dbTables->enableUserAfterPaid($data);
+    }
 }

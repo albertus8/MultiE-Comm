@@ -29,6 +29,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- External DatePicker JavaScript -->
     <script src="<?php echo base_url("assets/js/ext/bootstrap-datepicker.js"); ?>"></script>
 
+    <!-- DataTables JavaScript -->
+    <script src="<?php echo base_url("assets/js/jquery.dataTables.min.js"); ?>"></script>
+    <script src="<?php echo base_url("assets/js/dataTables.bootstrap.min.js"); ?>"></script>
+
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" rel="stylesheet">
 
@@ -40,6 +44,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Morris Charts CSS -->
     <link href="<?php echo base_url("assets/css/plugins/morris.css"); ?>" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="<?php echo base_url("assets/css/dataTables.bootstrap.min.css"); ?>" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url("assets/font-awesome/css/font-awesome.min.css"); ?>" rel="stylesheet" type="text/css">

@@ -21,7 +21,12 @@ class Checkout extends CI_Controller {
         }
 
         $checkTrans = $this->DbPayment->checkCheckout();
-        if($checkTrans){
+//        if($checkTrans){
+//            redirect('Confirmation');
+//        }
+        if(date('Y-m-d H:i:s', strtotime($checkTrans['timerEnd'])) < date('Y-m-d H:i:s')){
+//            redirect('Checkout');
+        }else{
             redirect('Confirmation');
         }
 
