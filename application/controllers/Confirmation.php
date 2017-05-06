@@ -35,8 +35,10 @@ class Confirmation extends CI_Controller {
 
         $dataTime = $this->DbPayment->checkPayment($getData);
 
-        var_dump($dataTime);
+//        var_dump($dataTime);
 
+        $checkoutFromDb = $this->DbPayment->checkCheckout();
+        $response['checkoutDB'] = $checkoutFromDb;
         $this->output->enable_profiler(TRUE);
         $response['data'] = $session_id;
         $response['paket'] = $userBuy;

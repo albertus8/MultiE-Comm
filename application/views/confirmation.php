@@ -118,6 +118,11 @@
                     document.getElementById("demo").innerHTML = "EXPIRED";
                 }
             }, 1000);
+            var catchFile="";
+            var formData = new FormData();
+            $('input[type="file"]').change(function(){
+                catchFile = $('#targetText').val($(this).val().replace(/.*(\/|\\)/, ''));
+            });
         });
     </script>
 </head>
@@ -182,14 +187,14 @@
                 <div class="col-md-6 col-centered">
                     <div class="alert alert-warning">
                         <p class="text-center">Jumlah yang harus dibayar</p>
-                        <p class="text-center"><?php echo "IDR".str_pad(number_format($checkoutData,2,',','.'),20 ," ",STR_PAD_LEFT);; ?></p>
+                        <p class="text-center"><?php echo "IDR".str_pad(number_format($checkoutDB['totalBayar'],2,',','.'),20 ," ",STR_PAD_LEFT);; ?></p>
                     </div>
                     <i>Jika jumlah yang ditransfer tidak sesuai, proses verifikasi pembayaran Anda dapat terhambat.</i>
                     <hr />
                 </div>
 
                 <div class="col-md-6 col-centered">
-                    <p>Informasi Rekening Tujuan</p>
+                    <h5>Informasi Rekening Tujuan</h5>
 
                     <br />
                     <div class="col-md-4 pull-left"><img src="img/bank/bank-bca-logo-2.JPG" alt="Bank BCA" width="100%" /></div>
@@ -200,9 +205,22 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-centered" style="padding-top: 150px">
-                    <button type="button" class="btn btn-xl" name="uploadBuktiPembayaran" id="uploadBuktiPembayaran" style="cursor: pointer;"><i class="fa fa-upload" aria-hidden="true"></i> Unggah Bukti / Cek Status Pembayaran </button>
-                </div>
+                    <h5><i class="fa fa-upload" aria-hidden="true"></i> Unggah Bukti / Cek Status Pembayaran</h5>
+<!--                    <button type="button" class="btn btn-xl" id="uploadBuktiPembayaran" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;"><i class="fa fa-upload" aria-hidden="true"></i> Unggah Bukti / Cek Status Pembayaran </button>-->
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                    Browse&hellip; <input type="file" id="selectFile" accept="image/*" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" style="display: none;">
+                                </span>
+                        </label>
+                        <input type="text" id="targetText" class="form-control text-right" readonly>
+                    </div>
+                    <img id="blah" width="525"/>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-xl" id="submitBuktiPembayaran" style="cursor: pointer; width: 100%"><i class="fa fa-upload" aria-hidden="true"></i> Unggah Bukti / Cek Status Pembayaran </button>
+                    </div>
 
+                </div>
             </div>
 
         </div>

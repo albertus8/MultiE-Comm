@@ -12,16 +12,37 @@ Class Dbpayment extends CI_Model
     }
     function checkCheckout(){
         $session_id = $this->session->userdata('loginData');
-        $this -> db -> select('*');
+//        $this -> db -> select('*');
         $this -> db -> from('data_transaksi');
         $this -> db -> where('ID_user',$session_id['ID_user']);
-        $this -> db -> where('CONFIRMED',0);
-        $this -> db -> where('ENABLE',0);
+//        $this -> db -> where('CONFIRMED',0);
+//        $this -> db -> where('ENABLE',0);
         $query = $this->db->get();
+        //print query
+//            $sql = $this->db->set('ID_user',$session_id['ID_user'])->get_compiled_select();
+//            echo $sql;
+//        exit;
 
         if($query -> num_rows() > 0)
         {
-            return true;
+            foreach ($query->result() as $row)
+            {
+                $data = array(
+                    "idTransaksi" => $row->ID_TRANSAKSI,
+                    "idPaket"     => $row->ID_PAKET,
+                    "idUser"      => $row->ID_user,
+                    "namaPaket"   => $row->NAMA_PAKET,
+                    "durasiBulan" => $row->DURASI_BLN,
+                    "hargaPaket"  => $row->HARGA_PAKET,
+                    "totalBayar"  => $row->TOTAL_BAYAR,
+                    "timerStart"  => $row->TANGGAL_START,
+                    "timerEnd"    => $row->TANGGAL_END,
+                    "confirmed"   => $row->CONFIRMED,
+                    "enable"      => $row->ENABLE
+                );
+            }
+
+            return $data;
         }else{
             return false;
         }

@@ -33,6 +33,10 @@ class Subscriber extends CI_Controller
             echo "<input type='text' class='form-control' name='inputUsername' id='inputUsername' placeholder='Enter Username here' />";
         echo "</div>";
         echo "<div class='form-group'>";
+            echo "<label for='username'>Email :</label>";
+            echo "<input type='text' class='form-control' name='inputEmail' id='inputEmail' placeholder='Enter Email here' />";
+        echo "</div>";
+        echo "<div class='form-group'>";
             echo "<label for='password'>Password :</label>";
             echo "<input type='password' class='form-control' name='inputPassword' id='inputPassword' placeholder='Enter Password here' />";
         echo "</div>";
@@ -54,10 +58,10 @@ class Subscriber extends CI_Controller
             echo "<div class='dropdown'>";
                 echo "<button class='btn btn-primary dropdown-toggle primary-userLevel' type='button' data-toggle='dropdown'>Select Level User ";
                     echo "<span class='caret'></span></button>";
-                echo "<ul class='dropdown-menu userLevel'>";
-                    echo "<li><a>1: Super Admin</a></li>";
-                    echo "<li><a>2: Paid User</a></li>";
-                    echo "<li><a>3: Free User</a></li>";
+                echo "<ul class='dropdown-menu' id='userLevel'>";
+                    echo "<li value='1'><a>1: Super Admin</a></li>";
+                    echo "<li value='2'><a>2: Paid User</a></li>";
+                    echo "<li value='3'><a>3: Free User</a></li>";
                 echo "</ul>";
             echo "</div>";
         echo "</div>";
@@ -66,26 +70,15 @@ class Subscriber extends CI_Controller
             echo "<div class='dropdown'>";
                 echo "<button class='btn btn-primary dropdown-toggle primary-userStatus' type='button' data-toggle='dropdown'>Select Status User";
                     echo " <span class='caret'></span></button>";
-                echo "<ul class='dropdown-menu userStatus'>";
-                    echo "<li><a>Enable</a></li>";
-                    echo "<li><a>Disable</a></li>";
+                echo "<ul class='dropdown-menu' id='userStatus'>";
+                    echo "<li value='1'><a>Enable</a></li>";
+                    echo "<li value='0'><a>Disable</a></li>";
                 echo "</ul>";
             echo "</div>";
         echo "</div>";
         echo "<div class='form-group'>";
             echo "<button type='button' class='btn btn-primary btn-block' id='submitData'>Submit User Data</button>";
         echo "</div>";
-
-//        echo "<div id=\"static\" class=\"modal fade\" tabindex=\"-1\" data-backdrop=\"static\" data-keyboard=\"false\" style=\"display: none;\">";
-//        echo "<div class=\"modal-body\">";
-//        echo "<p>Would you like to continue with some arbitrary task?</p>";
-//        echo "</div>";
-//        echo "<div class=\"modal-footer\">";
-//        echo "<button type=\"button\" data-dismiss=\"modal\" class=\"btn btn-default\">Cancel</button>";
-//        echo "<button type=\"button\" data-dismiss=\"modal\" class=\"btn btn-primary\">Continue Task</button>";
-//        echo "</div>";
-//        echo "</div>";
-
     }
 
     function searchUserPost(){
@@ -130,13 +123,14 @@ class Subscriber extends CI_Controller
             array(
                 'ID_user' => "",
                 'username' => $getData[0],
-                'password' => $getData[1],
-                'firstname' => $getData[3],
-                'lastname' => $getData[4],
+                'email' => $getData[1],
+                'password' => $getData[2],
+                'firstname' => $getData[4],
+                'lastname' => $getData[5],
                 'joindate' => date("Y-m-d H:i:s"),
                 'remember_toogle' => 0,
-                'userLevel' => 3,
-                'enabledToggle' => 0,
+                'userLevel' => $getData[6],
+                'enabledToggle' => $getData[7],
                 'deletedRecord' => 0,
                 'deleteDate' => "0000-00-00 00:00:00"
             )

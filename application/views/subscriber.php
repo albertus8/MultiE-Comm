@@ -7,6 +7,7 @@
 ?>
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#example').DataTable();
         function loadPopupBox()
         {
             $('#myModal').modal('toggle');
@@ -26,26 +27,32 @@
                 type: 'post',
                 success: function(result) {
                     $("#myModal2").find('.modal-body').html(result);
-                    $('.userLevel li a').css( 'cursor', 'pointer' );
-                    $('.userLevel li a').on('click', function(){
+                    $("#userLevel").find("li").css( 'cursor', 'pointer' );
+                    $('#userLevel').find("li").on('click', function(){
                         $(this).css( 'cursor', 'pointer' );
                         $(".primary-userLevel").html($(this).text() + " <span class='caret'></span></button>");
+                        $(".primary-userLevel").val($(this).val());
                     });
-                    $('.userStatus li a').css( 'cursor', 'pointer' );
-                    $('.userStatus li a').on('click', function(){
+                    $('#userStatus').find("li").css( 'cursor', 'pointer' );
+                    $('#userStatus').find("li").on('click', function(){
                         $(".primary-userStatus").html($(this).text() + " <span class='caret'></span></button>");
+                        $(".primary-userStatus").val($(this).val());
                     });
 
                     var getData = [];
                     $("#submitData").on('click',function(){
-                        getData[0] = $("#inputUsername").val();
-                        getData[1] = $("#inputPassword").val();
-                        getData[2] = $("#inputConfirmPassword").val();
-                        getData[3] = $("#inputfName").val();
-                        getData[4] = $("#inputlName").val();
-                        getData[5] = $(".primary-userLevel").text();
-                        getData[6] = $(".primary-userStatus").text();
+                        var something1 = $(".primary-userLevel").val();
+                        var something2 = $(".primary-userStatus").val();
+                        console.log(something1+" "+something2);
 
+                        getData[0] = $("#inputUsername").val();
+                        getData[1] = $("#inputEmail").val();
+                        getData[2] = $("#inputPassword").val();
+                        getData[3] = $("#inputConfirmPassword").val();
+                        getData[4] = $("#inputfName").val();
+                        getData[5] = $("#inputlName").val();
+                        getData[6] = something1;
+                        getData[7] = something2;
                         $.ajax({
                             url: 'Subscriber/insertUser',
                             data: {getData: getData},
@@ -192,33 +199,39 @@
                 <div class="col-lg-9">
                     <h2>Data Subscriber</h2>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table id="example" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Username</th>
+                                <th style="vertical-align: middle";>ID</th>
+                                <th style="vertical-align: middle";>Username</th>
 <!--                                    <th>Password</th>-->
-                                <th>Nama Depan</th>
-                                <th>Nama Belakang</th>
-                                <th class='text-center'>Tanggal Join</th>
-                                <th class='text-center'>Remember Me</th>
-                                <th class='text-center'>Level User</th>
-                                <th class='text-center'>Enabled</th>
+                                <th style="vertical-align: middle";>Nama Depan</th>
+                                <th style="vertical-align: middle";>Nama Belakang</th>
+                                <th class='text-center' style="vertical-align: middle";>Tanggal Join</th>
+                                <th class='text-center' style="vertical-align: middle";>Remember Me</th>
+                                <th class='text-center' style="vertical-align: middle";>Level User</th>
+                                <th class='text-center' style="vertical-align: middle";>Enabled</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
                             for ($j = 0; $j < count($data); $j++){
                                 echo "<tr>";
-                                    echo "<td style='width: 10%'>".$data[$j]['ID']."</td>";
-                                    echo "<td style='width: 10%'>".$data[$j]['Username']."</td>";
+                                    echo "<td style='width: 10%; vertical-align: middle;'>".$data[$j]['ID']."</td>";
+                                    echo "<td style='width: 10%; vertical-align: middle;'>".$data[$j]['Username']."</td>";
 //                                        echo "<td>".$data[$j]['Password']."</td>";
-                                    echo "<td>".$data[$j]['Nama Depan']."</td>";
-                                    echo "<td>".$data[$j]['Nama Belakang']."</td>";
-                                    echo "<td class='text-center'>".$data[$j]['Tanggal Join']."</td>";
-                                    echo "<td class='text-center'>".$data[$j]['Remember Me']."</td>";
-                                    echo "<td class='text-center'>".$data[$j]['Level User']."</td>";
-                                    echo "<td class='text-center'>".$data[$j]['Enabled']."</td>";
+                                    echo "<td style='vertical-align: middle;'>".$data[$j]['Nama Depan']."</td>";
+                                    echo "<td style='vertical-align: middle;'>".$data[$j]['Nama Belakang']."</td>";
+                                    echo "<td class='text-center' style='vertical-align: middle;'>".$data[$j]['Tanggal Join']."</td>";
+                                    echo "<td class='text-center' style='vertical-align: middle;'>".$data[$j]['Remember Me']."</td>";
+                                    if($data[$j]['Level User'] == '1'){
+                                        echo "<td class='text-center' style='vertical-align: middle;'><span class='label label-danger'>ADMIN</span></td>";
+                                    }elseif($data[$j]['Level User'] == '2'){
+                                        echo "<td class='text-center' style='vertical-align: middle;'><span class='label label-warning'>PAID</span></td>";
+                                    }elseif($data[$j]['Level User'] == '3'){
+                                        echo "<td class='text-center' style='vertical-align: middle;'><span class='label label-default'>FREE</span></td>";
+                                    }
+                                    echo "<td class='text-center' style='vertical-align: middle;'>".$data[$j]['Enabled']."</td>";
 //                                        echo "<td class='text-right' style='white-space:pre;width: 20px'>".$data[$j]['Nominal']."</td>";
                                 echo "</tr>";
                             }

@@ -119,31 +119,40 @@ Class DbTables extends CI_Model
 
     function getTableTransaction(){
         $session_id = $this->session->userdata('loginData');
-        $this->db->select("*");
-        $this->db->from('data_transaksi');
-//        $this->db->where('ID_user',$session_id["ID_user"]);
-        $query = $this->db->get();
+        $data = [];
 
-        if($query -> num_rows() > 0)
+        $where = "userLevel='2' OR userLevel='3'";
+        $this->db->where($where);
+        $query2 = $this->db->get('userlist');
+
+//        $sql = $this->db->get_compiled_select('userlist');
+//        echo $sql;
+
+        foreach ($query2->result() as $row2)
         {
+            $this->db->where('ID_user',$row2->ID_user);
+            $query = $this->db->get('data_transaksi');
+
             foreach ($query->result() as $row)
             {
                 $data[] = array(
-                    "ID"          => $row->ID_TRANSAKSI,
-                    "ID Paket"    => $row->ID_PAKET,
-                    "Tanggal"     => $row->TGL_BERLANGGANAN,
-                    "ID User"     => $row->ID_user,
-                    "Nama Paket"  => $row->NAMA_PAKET,
-                    "Harga"       => $row->HARGA_PAKET,
-                    "Confirmed"   => $row->CONFIRMED
+                    "ID Transaksi"    => $row->ID_TRANSAKSI,
+                    "ID Paket"        => $row->ID_PAKET,
+                    "ID User"         => $row2->ID_user,
+                    "Username"        => $row2->username,
+                    "Nama Paket"      => $row->NAMA_PAKET,
+                    "DurasiBulan"     => $row->DURASI_BLN,
+                    "Harga Paket"     => $row->HARGA_PAKET,
+                    "TotalBayar"      => $row->TOTAL_BAYAR,
+                    "TimerBayarStart" => $row->TANGGAL_START,
+                    "TimerBayarEnd"   => $row->TANGGAL_END,
+                    "Status"          => $row->CONFIRMED,
+                    "Enable"          => $row->ENABLE
                 );
             }
-            return $data;
+
         }
-        else
-        {
-            return false;
-        }
+        return $data;
     }
 
     function getConfirmedData(){
@@ -151,7 +160,7 @@ Class DbTables extends CI_Model
         $this->db->select("*");
         $this->db->from('data_transaksi');
 //        $this->db->where('ID_user',$session_id["ID_user"]);
-        $this->db->where("(CONFIRMED='0' and ENABLE='1')");
+        $this->db->where("(CONFIRMED='0' or ENABLE='0')");
         $queryA = $this->db->get();
         $data = [];
         if($queryA -> num_rows() > 0)
@@ -171,12 +180,52 @@ Class DbTables extends CI_Model
                         "ID User"         => $row->ID_user,
                         "Username"        => $row2->username,
                         "Nama Paket"      => $row->NAMA_PAKET,
-                        "Harga Paket"     => "IDR".str_pad(number_format($row->HARGA_PAKET,2,',','.'),20 ," ",STR_PAD_LEFT),
-                        "Status"          => $row->CONFIRMED
+                        "DurasiBulan"     => $row->DURASI_BLN,
+                        "Harga Paket"     => $row->HARGA_PAKET,
+                        "TotalBayar"      => $row->TOTAL_BAYAR,
+                        "TimerBayarStart" => $row->TANGGAL_START,
+                        "TimerBayarEnd"   => $row->TANGGAL_END,
+                        "Status"          => $row->CONFIRMED,
+                        "Enable"          => $row->ENABLE
                     );
                 }
             }
         }
         return $data;
+    }
+
+    function enableUserAfterPaid($data){
+        $this -> db -> select("ID_user, DURASI_BLN");
+        $this -> db -> from('data_transaksi');
+        $this -> db -> where('ID_TRANSAKSI',$data);
+        $query = $this->db->get();
+        foreach ($query->result() as $row)
+        {
+            $durasi = $row->DURASI_BLN;
+            $idUser = $row->ID_user;
+        }
+
+
+        $time = strtotime(date("Y-m-d"));
+        $final = date("Y-m-d", strtotime("+".$durasi."month", $time));
+
+        $dataUpdate = array(
+            'CONFIRMED'         => '1',
+            'ENABLE'            => '1',
+            'TGL_BERLANGGANAN'  => date("Y-m-d"),
+            'AKHIR_BERLANGGANAN'  => $final
+        );
+
+        $this->db->where('ID_TRANSAKSI', $data);
+        $this->db->update('data_transaksi', $dataUpdate);
+
+        $userUpdate = array(
+            'userLevel'         => '2',
+            'enabledToggle'     => '1'
+        );
+        $this->db->where('ID_user', $idUser);
+        $this->db->update('userlist', $userUpdate);
+//        $sql = $this->db->set($dataUpdate)->get_compiled_update('data_transaksi');
+//        echo $sql;
     }
 }

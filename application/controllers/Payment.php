@@ -9,6 +9,7 @@ class Payment extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        $this->load->model('DbPayment','',TRUE);
     }
     public function index()
     {
@@ -16,9 +17,13 @@ class Payment extends CI_Controller {
         $userBuy = $this->session->userdata('userPaidData');
         $checkoutData= $this->session->userdata('dataCheckout');
 
-
         if(!$session_id){
             $session_id = null;
+        }
+
+        if(!$checkoutData){
+            $dataDariDB = $this->DbPayment->checkCheckout();
+            $response['dataDariDB'] = $dataDariDB;
         }
 
         $this->output->enable_profiler(TRUE);
