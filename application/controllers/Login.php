@@ -15,7 +15,7 @@ class Login extends CI_Controller {
         $data['username'] = '';
         $data['password'] = '';
         $data['rmbMe'] = '';
-        $this->output->enable_profiler(TRUE);
+//        $this->output->enable_profiler(TRUE);
 
 
         if($session_id){

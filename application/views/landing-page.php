@@ -144,7 +144,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Products</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">Please select one of these products to subscribe our website!</h3>
                 </div>
             </div>
             <div class="row text-center">
@@ -160,7 +160,6 @@
                             <li><i class="fa-li fa fa-check"></i>Access Webpages</li>
                             <li><i class="fa-li fa fa-times"></i>Printable Report</li>
                             <li><i class="fa-li fa fa-times"></i>Unlimited Upload Data</li>
-    <!--                        <li><i class="fa-li fa fa-times"></i>Access Webpages</li>-->
                         </ul>
                     </p>
                     <input type="button" class="btn btn-xl" value="Select" name="free" id="selectBtn" style="cursor: pointer;" />
@@ -169,7 +168,6 @@
                     $arrFiture = [];
                     for($i=0;$i<count($response);$i++){
                         $arrFiture = explode(",",$response[$i]['Detail']);
-//                        print_r($arrFiture);
                     ?>
 
                     <div class="col-md-3">
@@ -220,39 +218,11 @@
                         </ul>
                         </p>
 
-<!--                        <a class="btn btn-xl" id="selectBtn">Select</a>-->
                         <input type="button" class="btn btn-xl" value="Select" name="<?php echo $response[$i]['ID']; ?>" id="selectBtn" style="cursor: pointer;" />
                     </div>
                         <?php
                     }
                 ?>
-<!--                <div class="col-md-3">-->
-<!--                    <span class="fa-stack fa-4x">-->
-<!--                        <i class="fa fa-circle fa-stack-2x text-primary"></i>-->
-<!--                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>-->
-<!--                    </span>-->
-<!--                    <h4 class="service-heading">--><?php //echo $response[0]['Nama Paket']; ?><!--</h4>-->
-<!--                    <p class="text-muted">IDR 10.000,00 /month</p>-->
-<!--                    <a class="btn btn-xl">Select</a>-->
-<!---->
-<!--                <div class="col-md-3">-->
-<!--                    <span class="fa-stack fa-4x">-->
-<!--                        <i class="fa fa-circle fa-stack-2x text-primary"></i>-->
-<!--                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>-->
-<!--                    </span>-->
-<!--                    <h4 class="service-heading">Gold</h4>-->
-<!--                    <p class="text-muted">IDR 20.000 /month</p>-->
-<!--                    <a class="btn btn-xl">Select</a>-->
-<!--                </div>-->
-<!--                <div class="col-md-3">-->
-<!--                    <span class="fa-stack fa-4x">-->
-<!--                        <i class="fa fa-circle fa-stack-2x text-primary"></i>-->
-<!--                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>-->
-<!--                    </span>-->
-<!--                    <h4 class="service-heading">Platinum</h4>-->
-<!--                    <p class="text-muted">IDR 30.000 /month</p>-->
-<!--                    <a class="btn btn-xl">Select</a>-->
-<!--                </div>-->
             </div>
         </div>
     </section>

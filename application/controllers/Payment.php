@@ -26,7 +26,7 @@ class Payment extends CI_Controller {
             $response['dataDariDB'] = $dataDariDB;
         }
 
-        $this->output->enable_profiler(TRUE);
+//        $this->output->enable_profiler(TRUE);
         $response['data'] = $session_id;
         $response['paket'] = $userBuy;
         $response['checkoutData'] = $checkoutData;

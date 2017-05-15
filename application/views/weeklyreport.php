@@ -76,8 +76,6 @@
                         for (i = 0; i < dataName.length; i++) {
                             getData.selectToko[i] = dataName[i];
                         }
-
-
                     });
 
                     $("#showWeb").on('click',function(){

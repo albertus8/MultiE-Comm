@@ -14,6 +14,7 @@
 
     $('#submitFile').on('click', function(){
         if(!catchFile){
+            // error empty data here
             console.log("empty");
         }else{
             formData.append('file', $('input[type=file]')[0].files[0]);
@@ -60,8 +61,6 @@
                 }
             });
         }
-
-
     });
 
 //    $("#selectFile").fileinput({

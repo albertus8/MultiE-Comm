@@ -64,7 +64,6 @@ class Checkout extends CI_Controller {
             'namaRek'   => ucwords($inputNamaRek)
         );
 
-
         $this->session->unset_userdata('dataPembayaran');
         $this->session->set_userdata('dataPembayaran', $dataBank);
     }

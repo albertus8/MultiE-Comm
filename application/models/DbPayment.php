@@ -4,7 +4,7 @@
  * Project MultiE-Comm
  * on Apr 2017.
  */
-Class Dbpayment extends CI_Model
+Class DbPayment extends CI_Model
 {
     function __construct()
     {
@@ -12,16 +12,13 @@ Class Dbpayment extends CI_Model
     }
     function checkCheckout(){
         $session_id = $this->session->userdata('loginData');
-//        $this -> db -> select('*');
         $this -> db -> from('data_transaksi');
         $this -> db -> where('ID_user',$session_id['ID_user']);
-//        $this -> db -> where('CONFIRMED',0);
-//        $this -> db -> where('ENABLE',0);
         $query = $this->db->get();
         //print query
-//            $sql = $this->db->set('ID_user',$session_id['ID_user'])->get_compiled_select();
-//            echo $sql;
-//        exit;
+    //            $sql = $this->db->set('ID_user',$session_id['ID_user'])->get_compiled_select();
+    //            echo $sql;
+    //        exit;
 
         if($query -> num_rows() > 0)
         {
@@ -66,9 +63,9 @@ Class Dbpayment extends CI_Model
         //generate ID_TRANSAKSI
         $ID_TRANSAKSI = "ECTR".$idDate."0001"; // varchar(14)
 
-//        echo "<pre>";
-//        print_r($getDataArray);
-//        echo "</pre>";
+    //        echo "<pre>";
+    //        print_r($getDataArray);
+    //        echo "</pre>";
         $this -> db -> select('*');
         $this -> db -> from('data_transaksi');
         $this -> db -> where('ID_user',$getDataArray['idUser']);
@@ -78,6 +75,12 @@ Class Dbpayment extends CI_Model
         {
             foreach ($query->result() as $row)
             {
+                //counter ID
+                $tempCtr = intval(substr($row->ID_PAKET, 10, 4)) + 1;
+                $strPad = str_pad($tempCtr,4,"0",STR_PAD_LEFT);
+                $newID = substr($ID_TRANSAKSI, 0, 10).$strPad;
+                $newIDtrans = $newID;
+
                 $dataTimer = array(
                     "idUser" => $row->ID_user,
                     "idPaket" => $row->ID_PAKET,
@@ -88,6 +91,8 @@ Class Dbpayment extends CI_Model
                     "startTimer" => $row->TANGGAL_START,
                     "endTimer" => $row->TANGGAL_END
                 );
+
+    //                $this->db->insert('data_transaksi', $dataTimer);
             }
             return $dataTimer;
         }else{
@@ -98,8 +103,8 @@ Class Dbpayment extends CI_Model
             $data = array(
                 'ID_TRANSAKSI'      => $ID_TRANSAKSI,
                 'ID_PAKET'          => $getDataArray['idPaket'],
-//                'TGL_BERLANGGANAN'  => date('Y-m-d'),
-//                'AKHIR_BERLANGGANAN'  =>$akhir,
+    //                'TGL_BERLANGGANAN'  => date('Y-m-d'),
+    //                'AKHIR_BERLANGGANAN'  =>$akhir,
                 'ID_user'           => $getDataArray['idUser'],
                 'NAMA_PAKET'        => $getDataArray['namaPaket'],
                 'DURASI_BLN'        => $getDataArray['totalBayar']/$getDataArray['hargaPaket'],
@@ -112,9 +117,9 @@ Class Dbpayment extends CI_Model
             );
 
             ////print query
-//            $sql = $this->db->set($data)->get_compiled_insert('data_transaksi');
-//            echo $sql;
-//
+    //            $sql = $this->db->set($data)->get_compiled_insert('data_transaksi');
+    //            echo $sql;
+    //
             $this->db->insert('data_transaksi', $data);
         }
     }

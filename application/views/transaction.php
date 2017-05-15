@@ -7,7 +7,7 @@
 ?>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('table.display').DataTable();
+//        $('table.display').DataTable();
         function loadPopupBox()
         {
             $('#myModal').modal('toggle');
@@ -165,7 +165,7 @@
                 <div class="col-lg-12 tab-pane fade" id="transaction2">
                     <h2>Data Konfirmasi Transaksi</h2>
                     <div class="table-responsive">
-                        <table class="table display table-hover" style="border: 1px solid #dddddd;">
+                        <table class="table table-hover" style="border: 1px solid #dddddd;">
                             <thead>
                             <tr>
                                 <th style="vertical-align: middle";>ID Transaksi</th>
