@@ -1,31 +1,24 @@
 [
 	{
-		"idbarang":"BC270417000002",
-		"namabarang":"GTX 1050 ZOTAC",
-		"jenis":"GPU",
-		"quantity":"20",
-		"hargasatuan":"2100000"
-	},
-	{
-		"idbarang":"BC270417000004",
-		"namabarang":"Mi Gamepad",
+		"idbarang":"BC060517000001",
+		"namabarang":"Tas Pesta Pandan",
 		"jenis":"Accesories",
 		"quantity":"20",
-		"hargasatuan":"250000"
+		"hargasatuan":"100000"
 	},
 	{
-		"iddpenjualan":"ECSE270417001",
-		"namatoko":"SAHABAT ELEKTRONIK",
-		"tanggal":"2017-04-27",
-		"totalpenjualan":"1000000"
+		"iddpenjualan":"ECAN060517001",
+		"namatoko":"ANUGRAH CINTA",
+		"tanggal":"2017-05-06",
+		"totalpenjualan":"200000"
 	},
 	{
-		"iddpenjualan":"ECSE270417001",
-		"idbarang":"BC270417000004",
-		"namabarang":"Mi Gamepad",
+		"iddpenjualan":"ECAN060517001",
+		"idbarang":"BC060517000001",
+		"namabarang":"Tas Pesta Pandan",
 		"jenis":"Accesories",
-		"quantity":"4",
-		"hargasatuan":"250000",
-		"subtotal":"1000000"
+		"quantity":"2",
+		"hargasatuan":"100000",
+		"subtotal":"200000"
 	}
 ]

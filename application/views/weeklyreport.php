@@ -70,20 +70,17 @@
                         });
                         $('#searchModal').modal('hide');
                         $("#inputData").val(dataName);
+
                         getData = {};
                         getData.selectToko = [];
-
                         for (i = 0; i < dataName.length; i++) {
                             getData.selectToko[i] = dataName[i];
                         }
-
-
                     });
 
                     $("#showWeb").on('click',function(){
                         getData.selectMonth = [];
                         getData.selectMonth = $("#inputDate").val();
-
                         $.ajax({
                             url: 'Report/searchReport',
                             data: {getData: getData},
@@ -93,6 +90,13 @@
                             }
                         });
                     });
+
+                    $("#convertPDF").on('click',function(){
+                        $.ajax({
+                            url: 'GeneratedPDF'
+                        });
+                    });
+
                 });
             });
         </script>

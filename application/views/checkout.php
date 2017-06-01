@@ -259,7 +259,6 @@
         </div>
         <div class="row pull-right" style="justify-content: center;">
             <button type="button" class="btn btn-xl" name="toPayment" id="toPayment" style="cursor: pointer;">ke Pembayaran <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-<!--            <input type="button" class="btn btn-xl" value="ke Pembayaran" name="toPayment" id="selectBtn" style="cursor: pointer;" />-->
         </div>
 
     </div>

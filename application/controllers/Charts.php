@@ -15,13 +15,9 @@ class Charts extends CI_Controller {
     {
         $session_id = $this->session->userdata('loginData');
         $data = $this->DbReport->getChartsData($session_id["ID_user"]);
-//        $data = $this->DbReport->getReportDataMonthly();
+    //        $data = $this->DbReport->getReportDataMonthly();
 
         $response['data'] = $data;
-//        echo "<pre>";
-////        var_dump($session_id["ID_user"]) ;
-//        print_r($data);
-//        echo "</pre>";
         $this->load->view('charts', $response);
     }
     function Weekly()

@@ -54,6 +54,8 @@
 
     <script type="text/javascript">
         $( document ).ready(function() {
+            $( "#fail-alert" ).hide();
+
             $( "#reviewBrd" ).click(function() {
                 $(".nav-link").removeClass("active");
                 $(this).addClass("active");
@@ -113,7 +115,9 @@
                         }
                     });
                 }else{
-                    // error karena input belum diisi
+                    $("#fail-alert").slideDown(500).fadeIn('slow', function () {
+                        $(this).delay(2000).slideUp(500);
+                    });
                 }
             });
 
@@ -192,7 +196,7 @@
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
                 <div class="alert alert-warning">
-                <strong>Warning!</strong> Demi keamanan transaksi Anda, pastikan untuk "TIDAK" memberikan <br />"BUKTI DAN DATA PEMBAYARAN" kepada pihak manapun kecuali MECO.
+                    <strong>Warning!</strong> Demi keamanan transaksi Anda, pastikan untuk "TIDAK" memberikan <br />"BUKTI DAN DATA PEMBAYARAN" kepada pihak manapun kecuali MECO.
                 </div>
             </div>
             <div class="col-lg-2"></div>
@@ -203,7 +207,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-info-circle fa-fw"></i> Detail Informasi</h3>
+                        <div id='fail-alert' class="alert alert-danger">
+                            <strong>Oops!</strong> It seems like something wrong happened with your input. Please re-input.
+                        </div>
                     </div>
+
                     <div class="control-group col-lg-12">
                         <div class='form-group'>
 <!--                            <label for='inputNama'>Bank Tujuan :</label>-->
@@ -244,12 +252,8 @@
                         if(!$checkoutData){
                             ?>
                         <p>Paket <?php echo $paket['Nama Paket']; ?></p>
-<!--                        <div class="col-md-6 pull-left">--><?php //echo $checkoutData/(int)$paket['Harga']; ?><!-- bulan</div>-->
-<!--                        <div class="col-md-6 pull-right text-right"> --><?php //echo "IDR".str_pad(number_format($paket['Harga'],2,',','.'),20 ," ",STR_PAD_LEFT); ?><!--</div>-->
                                 <div class="col-lg-12"><?php echo (int)$dataDariDB['totalBayar']/(int)$dataDariDB['hargaPaket']; ?> bulan x <?php echo "IDR".str_pad(number_format((int)$dataDariDB['hargaPaket'],2,',','.'),20 ," ",STR_PAD_LEFT); ?><hr /></div>
                                 <div class="col-md-6 pull-left"><b>Total Transaksi</b></div>
-
-
                                 <div class="col-md-6 pull-right text-right"><b> <?php echo "IDR".str_pad(number_format($dataDariDB['totalBayar'],2,',','.'),20 ," ",STR_PAD_LEFT); ?></b></div>
                                 <?php
                             }else{
@@ -260,12 +264,6 @@
                                 <?php
                             }
                         ?>
-<!--                        <div class="col-md-6 pull-right text-right"><b> --><?php //echo "IDR".str_pad(number_format($checkoutData,2,',','.'),20 ," ",STR_PAD_LEFT); ?><!--</b></div>-->
-
-<!--                            Item = --><?php //echo $paket['Nama Paket']; ?><!-- <br />-->
-<!--                            Satuan = --><?php //echo $paket['Harga']; ?><!-- <br />-->
-<!--                            Qty = --><?php //echo $checkoutData/(int)$paket['Harga']; ?><!-- <br />-->
-<!--                            TOTAL = --><?php //echo $checkoutData; ?><!-- <br />-->
                     </div>
                 </div>
 

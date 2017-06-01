@@ -171,7 +171,7 @@ Class InsertApi extends CI_Model
         }
         // end of detail nota
         $this->db->trans_complete();
-        
+
 //        for($j=0; $j < count($array); $j++){
 //            $encArr = json_decode($array[$j], true);
 //

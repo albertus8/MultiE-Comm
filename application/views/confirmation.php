@@ -72,7 +72,6 @@
                 });
             });
             $('#toRegister').click(function(){
-
                 $.ajax({
                     url: 'Checkout/extFrom',
                     data: {"data" : intInput},
@@ -85,13 +84,10 @@
 
             // Set the date we're counting down to
             var current = new Date();
-            var from = "<?php echo gmdate('D F d Y H:i:s TP', strtotime($dataTime['endTimer']."-5 hours")); ?>" ;
+            var from = "<?php echo gmdate('D F d Y H:i:s TP', strtotime($dataTime."-5 hours")); ?>" ;
 //            var followingDay = new Date(current.getTime() + 86400000); // + 1 day in ms
             var followingDay = new Date(from); // + 1 day in ms
             followingDay.toLocaleDateString();
-
-//            console.log(from);
-            console.log(followingDay);
 
             // Update the count down every 1 second
             var x = setInterval(function() {
@@ -116,12 +112,37 @@
                 if (distance < 0) {
                     clearInterval(x);
                     document.getElementById("demo").innerHTML = "EXPIRED";
+                    $.ajax({
+                        url: 'Confirmation/flush',
+                        type: 'post',
+                        success: function() {
+                            window.location.href = 'Landing#services';
+                        }
+                    });
                 }
             }, 1000);
+
             var catchFile="";
             var formData = new FormData();
             $('input[type="file"]').change(function(){
                 catchFile = $('#targetText').val($(this).val().replace(/.*(\/|\\)/, ''));
+            });
+
+            $('#submitBuktiPembayaran').click(function(){
+                formData.append('image', $('input[type=file]')[0].files[0]);
+                console.log(formData);
+                $.ajax({
+                    url: 'Confirmation/BuktiTransaksi',
+                    data: formData,
+                    type: 'post',
+                    contentType     : false,       // The content type used when sending data to the server.
+                    cache           : false,             // To unable request pages to be cached
+                    processData     : false,        // To send DOMDocument or non processed data file it is set to false
+                    success: function(result) {
+                        console.log(result);
+//                        window.location.href = 'Login';
+                    }
+                });
             });
         });
     </script>
@@ -139,6 +160,7 @@
                 <li class="nav-item">
                     <a class="nav-link" id="reviewBrd" href="">Review</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                 </li>
@@ -181,7 +203,7 @@
         <div class="row">
             <div class="col-lg-12" style="">
                 <p class="text-center"><b>Mohon Segera Selesaikan Pembayaran</b></p>
-                <p class="text-center">Transfer dana anda sebelum tanggal <b><?php echo $dataTime['endTimer']; ?></b></p>
+                <p class="text-center">Transfer dana anda sebelum tanggal <b><?php echo $dataTime; ?></b></p>
                 <h3><p id="demo" class="text-center"></h3>
 
                 <div class="col-md-6 col-centered">
@@ -197,7 +219,7 @@
                     <h5>Informasi Rekening Tujuan</h5>
 
                     <br />
-                    <div class="col-md-4 pull-left"><img src="img/bank/bank-bca-logo-2.JPG" alt="Bank BCA" width="100%" /></div>
+                    <div class="col-md-4 pull-left"><img src="./img/bank/bank-bca-logo-2.JPG" alt="Bank BCA" width="100%" /></div>
                     <div class="col-md-8 pull-right">
                         BCA <br />
                         Nomor Rekening: <b>614 014 9941</b> <br />
@@ -210,7 +232,7 @@
                     <div class="input-group">
                         <label class="input-group-btn">
                                 <span class="btn btn-primary">
-                                    Browse&hellip; <input type="file" id="selectFile" accept="image/*" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" style="display: none;">
+                                    Browse&hellip; <input type="file" name="userfile" id="selectFile" accept="image/*" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" style="display: none;">
                                 </span>
                         </label>
                         <input type="text" id="targetText" class="form-control text-right" readonly>

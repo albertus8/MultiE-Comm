@@ -87,18 +87,10 @@ Class DbTables extends CI_Model
     }
 
     function getDetailPenjualan(){
-        $session_id = $this->session->userdata('loginData');
-
-        $this->db->select("*");
         $this->db->from('d_data_penjualan');
         $query = $this->db->get();
-//        echo "<pre>";
-//        print_r($query->result());
-
-        if($query -> num_rows() > 0)
-        {
-            foreach ($query->result() as $row)
-            {
+        if($query -> num_rows() > 0) {
+            foreach ($query->result() as $row) {
                 $data[] = array(
                     "ID"              => $row->ID_DPENJUALAN,
                     "ID Barang"       => $row->ID_BARANG,
@@ -110,9 +102,7 @@ Class DbTables extends CI_Model
                 );
             }
             return $data;
-        }
-        else
-        {
+        }else{
             return false;
         }
     }
@@ -194,38 +184,30 @@ Class DbTables extends CI_Model
         return $data;
     }
 
-    function enableUserAfterPaid($data){
-        $this -> db -> select("ID_user, DURASI_BLN");
-        $this -> db -> from('data_transaksi');
-        $this -> db -> where('ID_TRANSAKSI',$data);
-        $query = $this->db->get();
-        foreach ($query->result() as $row)
-        {
-            $durasi = $row->DURASI_BLN;
-            $idUser = $row->ID_user;
-        }
-
-
-        $time = strtotime(date("Y-m-d"));
-        $final = date("Y-m-d", strtotime("+".$durasi."month", $time));
-
-        $dataUpdate = array(
-            'CONFIRMED'         => '1',
-            'ENABLE'            => '1',
-            'TGL_BERLANGGANAN'  => date("Y-m-d"),
-            'AKHIR_BERLANGGANAN'  => $final
-        );
-
-        $this->db->where('ID_TRANSAKSI', $data);
-        $this->db->update('data_transaksi', $dataUpdate);
-
-        $userUpdate = array(
-            'userLevel'         => '2',
-            'enabledToggle'     => '1'
-        );
-        $this->db->where('ID_user', $idUser);
-        $this->db->update('userlist', $userUpdate);
-//        $sql = $this->db->set($dataUpdate)->get_compiled_update('data_transaksi');
-//        echo $sql;
+function enableUserAfterPaid($data){
+    $this -> db -> select("ID_user, DURASI_BLN");
+    $this -> db -> from('data_transaksi');
+    $this -> db -> where('ID_TRANSAKSI',$data);
+    $query = $this->db->get();
+    foreach ($query->result() as $row) {
+        $durasi = $row->DURASI_BLN;
+        $idUser = $row->ID_user;
     }
+    $time = strtotime(date("Y-m-d"));
+    $final = date("Y-m-d", strtotime("+".$durasi."month", $time));
+    $dataUpdate = array(
+        'CONFIRMED'         => '1',
+        'ENABLE'            => '1',
+        'TGL_BERLANGGANAN'  => date("Y-m-d"),
+        'AKHIR_BERLANGGANAN'  => $final
+    );
+    $this->db->where('ID_TRANSAKSI', $data);
+    $this->db->update('data_transaksi', $dataUpdate);
+    $userUpdate = array(
+        'userLevel'         => '2',
+        'enabledToggle'     => '1'
+    );
+    $this->db->where('ID_user', $idUser);
+    $this->db->update('userlist', $userUpdate);
+}
 }

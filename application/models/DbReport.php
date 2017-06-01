@@ -10,58 +10,43 @@ Class DbReport extends CI_Model
     {
         parent::__construct();
     }
-    function getReportDataWeekly($iduser, $getData)
-    {
-        $lastDay = new DateTime("01-".$getData["selectMonth"]);
-        $firstDay = new DateTime("01-".$getData["selectMonth"]);
-        $temp_first = $firstDay->format( 'Y-m-01' );
-        $temp_date = $lastDay->format( 'Y-m-t' );
-//        print_r($temp_first);
-//        print_r($temp_date);
-
-        $where_nama_toko = "";
-
-        for($i = 0; $i < count($getData["selectToko"]); $i++){
-            $where_nama_toko .= " NAMA_TOKO = '".strtoupper($getData["selectToko"][$i]) . "' OR";
-        }
-
-        $where_nama_toko = substr($where_nama_toko, 0, -2);
-
-//        $where_nama_toko .= " AND TGL_BELI BETWEEN ". $temp_first ." AND ". $temp_date;
-
-        $this->db->select('ID_DPENJUALAN, ID_user, TGL_BELI, NAMA_TOKO, SUM(TOTAL_PENJUALAN) AS TOTAL_PENJUALAN');
-        $this->db->from('data_penjualan');
-        $this->db->where('ID_user', $iduser);
-        $this->db->where("(".$where_nama_toko.")");
-
-        $this->db->where("TGL_BELI BETWEEN '$temp_first' and '$temp_date'");
-
-        $this->db->group_by('NAMA_TOKO');
-        $this->db->order_by('NAMA_TOKO');
-        $query = $this->db->get();
-
-//        print_r($query);
-//        exit;
-
-        if($query -> num_rows() > 0)
-        {
-            foreach ($query->result() as $row)
-            {
-                $data[] = array(
-                    "ID"        => $row->ID_DPENJUALAN,
-                    "Nama Toko"    => $row->NAMA_TOKO,
-                    "Tanggal"    => $row->TGL_BELI,
-//                    "Tanggal"    => date('D', strtotime($row->TGL_BELI)), //date format
-                    "Penjualan" => $row->TOTAL_PENJUALAN
-                );
-            }
-            return $data;
-        }
-        else
-        {
-            return false;
-        }
+function getReportDataWeekly($iduser, $getData)
+{
+    $lastDay = new DateTime("01-".$getData["selectMonth"]);
+    $firstDay = new DateTime("01-".$getData["selectMonth"]);
+    $temp_first = $firstDay->format( 'Y-m-01' );
+    $temp_date = $lastDay->format( 'Y-m-t' );
+    $where_nama_toko = "";
+    for($i = 0; $i < count($getData["selectToko"]); $i++){
+        $where_nama_toko .= " NAMA_TOKO = '".strtoupper($getData["selectToko"][$i]) . "' OR";
     }
+    $where_nama_toko = substr($where_nama_toko, 0, -2);
+    $this->db->select('ID_DPENJUALAN, ID_user, TGL_BELI, NAMA_TOKO, SUM(TOTAL_PENJUALAN) AS TOTAL_PENJUALAN');
+    $this->db->from('data_penjualan');
+    $this->db->where('ID_user', $iduser);
+    $this->db->where("(".$where_nama_toko.")");
+    $this->db->where("TGL_BELI BETWEEN '$temp_first' and '$temp_date'");
+    $this->db->group_by('NAMA_TOKO');
+    $this->db->order_by('NAMA_TOKO');
+    $query = $this->db->get();
+    if($query -> num_rows() > 0)
+    {
+        foreach ($query->result() as $row)
+        {
+            $data[] = array(
+                "ID"        => $row->ID_DPENJUALAN,
+                "Nama Toko"    => $row->NAMA_TOKO,
+                "Tanggal"    => $row->TGL_BELI,
+                "Penjualan" => $row->TOTAL_PENJUALAN
+            );
+        }
+        return $data;
+    }
+    else
+    {
+        return false;
+    }
+}
     function getReportDataMonthly()
     {
         $this->db->select("TGL_BELI,TOTAL_PENJUALAN");
@@ -90,7 +75,7 @@ Class DbReport extends CI_Model
         $this->db->select('*');
         $this->db->from('data_penjualan');
         $this->db->where('ID_user', $iduser);
-//        $this->db->where("(TGL_BELI BETWEEN '2017-02-01' and '2017-02-08')");
+        //$this->db->where("(TGL_BELI BETWEEN '2017-02-01' and '2017-02-08')");
         $this->db->group_by('TGL_BELI');
         $queryTanggal = $this->db->get();
 
@@ -172,10 +157,10 @@ Class DbReport extends CI_Model
             }
             $ctr++;
         }
-//
-//        echo "<pre>";
-//        print_r($getNamaToko);
-//        echo "</pre>";
+    //
+    //        echo "<pre>";
+    //        print_r($getNamaToko);
+    //        echo "</pre>";
 
         $data["Toko"] = $getNamaToko;
         $data["Data"] = $pasti;

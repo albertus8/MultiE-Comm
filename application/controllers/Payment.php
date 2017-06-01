@@ -16,6 +16,7 @@ class Payment extends CI_Controller {
         $session_id = $this->session->userdata('loginData');
         $userBuy = $this->session->userdata('userPaidData');
         $checkoutData= $this->session->userdata('dataCheckout');
+        $this->output->enable_profiler(TRUE);
 
         if(!$session_id){
             $session_id = null;
@@ -26,7 +27,6 @@ class Payment extends CI_Controller {
             $response['dataDariDB'] = $dataDariDB;
         }
 
-        $this->output->enable_profiler(TRUE);
         $response['data'] = $session_id;
         $response['paket'] = $userBuy;
         $response['checkoutData'] = $checkoutData;

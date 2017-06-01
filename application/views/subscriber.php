@@ -43,8 +43,6 @@
                     $("#submitData").on('click',function(){
                         var something1 = $(".primary-userLevel").val();
                         var something2 = $(".primary-userStatus").val();
-                        console.log(something1+" "+something2);
-
                         getData[0] = $("#inputUsername").val();
                         getData[1] = $("#inputEmail").val();
                         getData[2] = $("#inputPassword").val();
@@ -90,16 +88,13 @@
                 });
                 $('body').css("overflow","auto");
             });
-//            $('#warningModal').on('hidden.bs.modal', function () {
-//                $('body').css("overflow","hidden");
-//            });
+
             $.ajax({
                 url: 'Subscriber/deleteUser',
                 success: function(result) {
                     $('body').css("overflow","hidden");
                     $(".modal-body #targetView").html(result);
                     var dataID = "";
-
                     $("#searchGo").on('click',function(){
                         dataID = $("#searchUser").val();
 //                        console.log(dataID);
@@ -137,7 +132,6 @@
                             }
                         });
                     });
-//                    $('body').css("overflow","auto");
 
                     $(".modal-body tbody").find("tr").css( 'cursor', 'pointer' );
                     $(".modal-body tbody").find("tr").on('click',function(){
@@ -151,7 +145,6 @@
                         $('#warningModal').modal('hide');
                         $('#myModal').modal('show');
 
-//                        $('body').css("overflow","hidden");
                     });
                     $("#yesOption").on('click',function(){
                         $.ajax({
@@ -219,7 +212,6 @@
                                 echo "<tr>";
                                     echo "<td style='width: 10%; vertical-align: middle;'>".$data[$j]['ID']."</td>";
                                     echo "<td style='width: 10%; vertical-align: middle;'>".$data[$j]['Username']."</td>";
-//                                        echo "<td>".$data[$j]['Password']."</td>";
                                     echo "<td style='vertical-align: middle;'>".$data[$j]['Nama Depan']."</td>";
                                     echo "<td style='vertical-align: middle;'>".$data[$j]['Nama Belakang']."</td>";
                                     echo "<td class='text-center' style='vertical-align: middle;'>".$data[$j]['Tanggal Join']."</td>";
@@ -232,11 +224,9 @@
                                         echo "<td class='text-center' style='vertical-align: middle;'><span class='label label-default'>FREE</span></td>";
                                     }
                                     echo "<td class='text-center' style='vertical-align: middle;'>".$data[$j]['Enabled']."</td>";
-//                                        echo "<td class='text-right' style='white-space:pre;width: 20px'>".$data[$j]['Nominal']."</td>";
                                 echo "</tr>";
                             }
-//
-//                                ?>
+                            ?>
                             </tbody>
                         </table>
                     </div>

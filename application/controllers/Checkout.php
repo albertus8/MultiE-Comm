@@ -15,22 +15,18 @@ class Checkout extends CI_Controller {
     {
         $session_id = $this->session->userdata('loginData');
         $userBuy = $this->session->userdata('userPaidData');
+//        $this->output->enable_profiler(TRUE);
 
         if(!$session_id){
             $session_id = null;
         }
 
         $checkTrans = $this->DbPayment->checkCheckout();
-//        if($checkTrans){
-//            redirect('Confirmation');
-//        }
-        if(date('Y-m-d H:i:s', strtotime($checkTrans['timerEnd'])) < date('Y-m-d H:i:s')){
-//            redirect('Checkout');
-        }else{
+        $now = date('Y-m-d H:i:s', strtotime("+5 hours"));
+        if(strtotime($checkTrans['timerEnd']) > strtotime($now)){
             redirect('Confirmation');
         }
 
-        $this->output->enable_profiler(TRUE);
         $response['data'] = $session_id;
         $response['package'] = $userBuy;
         $this->load->view('checkout', $response);
@@ -44,7 +40,6 @@ class Checkout extends CI_Controller {
     function jumlahInput(){
         $userBuy = $this->session->userdata('userPaidData');
         $intInput = $this->input->post('data');
-//        var_dump((int)$userBuy['Harga']);
 
         $this->session->unset_userdata('dataCheckout');
         $calculate = (int)$userBuy['Harga']*$intInput;
@@ -63,7 +58,6 @@ class Checkout extends CI_Controller {
             'noRek'     => $inputNomerRek,
             'namaRek'   => ucwords($inputNamaRek)
         );
-
 
         $this->session->unset_userdata('dataPembayaran');
         $this->session->set_userdata('dataPembayaran', $dataBank);

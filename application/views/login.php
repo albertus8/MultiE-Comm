@@ -28,14 +28,7 @@
     <div class="panel-body">
   
       <div class="row">
-
-        <div class="col-md-5" >
-            <a href="#"><img src="http://techulus.com/buttons/fb.png" /></a><br/>
-            <a href="#"><img src="http://techulus.com/buttons/tw.png" /></a><br/>
-            <a href="#"><img src="http://techulus.com/buttons/gplus.png" /></a>
-        </div>
-
-        <div class="col-md-7" style="border-left:1px solid #ccc;height:140px">
+        <div class="col-md-12" style="border-left:1px solid #ccc;height:140px">
         <?php
             echo form_open('login');
                 echo form_input("username",$username,"placeholder='Enter User Name' class='form-control input-md'");

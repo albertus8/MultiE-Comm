@@ -4,7 +4,7 @@
  * Project MultiE-Comm
  * on Apr 2017.
  */
-Class Dbpayment extends CI_Model
+Class DbPayment extends CI_Model
 {
     function __construct()
     {
@@ -12,16 +12,13 @@ Class Dbpayment extends CI_Model
     }
     function checkCheckout(){
         $session_id = $this->session->userdata('loginData');
-//        $this -> db -> select('*');
         $this -> db -> from('data_transaksi');
         $this -> db -> where('ID_user',$session_id['ID_user']);
-//        $this -> db -> where('CONFIRMED',0);
-//        $this -> db -> where('ENABLE',0);
         $query = $this->db->get();
         //print query
-//            $sql = $this->db->set('ID_user',$session_id['ID_user'])->get_compiled_select();
-//            echo $sql;
-//        exit;
+    //            $sql = $this->db->set('ID_user',$session_id['ID_user'])->get_compiled_select();
+    //            echo $sql;
+    //        exit;
 
         if($query -> num_rows() > 0)
         {
@@ -66,56 +63,115 @@ Class Dbpayment extends CI_Model
         //generate ID_TRANSAKSI
         $ID_TRANSAKSI = "ECTR".$idDate."0001"; // varchar(14)
 
-//        echo "<pre>";
-//        print_r($getDataArray);
-//        echo "</pre>";
-        $this -> db -> select('*');
+        $dataPembayaran = $this->session->userdata('dataPembayaran');
+
         $this -> db -> from('data_transaksi');
         $this -> db -> where('ID_user',$getDataArray['idUser']);
         $query = $this->db->get();
 
-        if($query -> num_rows() > 0)
+        $now = date('Y-m-d H:i:s', strtotime("+5 hours"));
+        $tomorrow = date("Y-m-d H:i:s" , strtotime("+29 hours"));
+        if($query -> num_rows() == 0)
         {
-            foreach ($query->result() as $row)
+            // bila user belum pernah melakukan transaksi
+            // INSERT data utk pertama kali; counter ID_TRANSAKSI = 0001
+            $this -> db -> from('data_transaksi');
+            $query2 = $this->db->get();
+            foreach ($query2->result() as $row2)
             {
-                $dataTimer = array(
-                    "idUser" => $row->ID_user,
-                    "idPaket" => $row->ID_PAKET,
-                    "namaPaket" => $row->NAMA_PAKET,
-                    "durasiLangganan" => $row->DURASI_BLN,
-                    "hargaPaket" => $row->HARGA_PAKET,
-                    "totalBayar" => $row->TOTAL_BAYAR,
-                    "startTimer" => $row->TANGGAL_START,
-                    "endTimer" => $row->TANGGAL_END
-                );
+                if(substr($row2->ID_TRANSAKSI, 0, 10) == "ECTR".$idDate){
+                    //counter ID
+                    $tempCtr = intval(substr($row2->ID_TRANSAKSI, 10, 4)) + 1;
+                    $strPad = str_pad($tempCtr,4,"0",STR_PAD_LEFT);
+                    $ID_TRANSAKSI = "ECTR".$idDate.$strPad;
+                }
             }
-            return $dataTimer;
-        }else{
-            $tomorrow = date("Y-m-d H:i:s" , strtotime("+29 hours"));
-            $param = $getDataArray['totalBayar']/$getDataArray['hargaPaket']." month";
-            $akhir = date("Y-m-d" , strtotime($param));
 
             $data = array(
                 'ID_TRANSAKSI'      => $ID_TRANSAKSI,
                 'ID_PAKET'          => $getDataArray['idPaket'],
-//                'TGL_BERLANGGANAN'  => date('Y-m-d'),
-//                'AKHIR_BERLANGGANAN'  =>$akhir,
+                //                'TGL_BERLANGGANAN'  => date('Y-m-d'),
+                //                'AKHIR_BERLANGGANAN'  =>$akhir,
                 'ID_user'           => $getDataArray['idUser'],
                 'NAMA_PAKET'        => $getDataArray['namaPaket'],
                 'DURASI_BLN'        => $getDataArray['totalBayar']/$getDataArray['hargaPaket'],
                 'HARGA_PAKET'       => $getDataArray['hargaPaket'],
                 'TOTAL_BAYAR'       => $getDataArray['totalBayar'],
-                'TANGGAL_START'     => date('Y-m-d H:i:s', strtotime("+5 hours")),
+                'TANGGAL_START'     => $now,
                 'TANGGAL_END'       => $tomorrow,
+                'NamaBank'          => $dataPembayaran['namaBank'],
+                'NoRek'             => $dataPembayaran['noRek'],
+                'RekAtasNama'       => $dataPembayaran['namaRek'],
+                'BuktiTransaksi'    => "",
                 'CONFIRMED'         => 0,
-                'ENABLE'           => 0
+                'ENABLE'            => 0
             );
-
-            ////print query
-//            $sql = $this->db->set($data)->get_compiled_insert('data_transaksi');
-//            echo $sql;
-//
             $this->db->insert('data_transaksi', $data);
+            $batasakhir = $tomorrow;
         }
+        else
+        {
+            // bila user pernah melakukan transaksi
+            foreach ($query->result() as $row)
+            {
+                $this -> db -> from('data_transaksi');
+                $query2 = $this->db->get();
+                foreach ($query2->result() as $row2)
+                {
+                    if(substr($row2->ID_TRANSAKSI, 0, 10) == "ECTR".$idDate){
+                        //counter ID
+                        $tempCtr = intval(substr($row2->ID_TRANSAKSI, 10, 4)) + 1;
+                        $strPad = str_pad($tempCtr,4,"0",STR_PAD_LEFT);
+                        $ID_TRANSAKSI = "ECTR".$idDate.$strPad;
+                    }
+                }
+                $batasakhir = $row->TANGGAL_END;
+
+                var_dump(strtotime($batasakhir));
+                var_dump(strtotime($now));
+            }
+            if(strtotime($batasakhir) <= strtotime($now))
+            {
+                $data = array(
+                    'ID_TRANSAKSI'      => $ID_TRANSAKSI,
+                    'ID_PAKET'          => $getDataArray['idPaket'],
+                    //                'TGL_BERLANGGANAN'  => date('Y-m-d'),
+                    //                'AKHIR_BERLANGGANAN'  =>$akhir,
+                    'ID_user'           => $getDataArray['idUser'],
+                    'NAMA_PAKET'        => $getDataArray['namaPaket'],
+                    'DURASI_BLN'        => $getDataArray['totalBayar']/$getDataArray['hargaPaket'],
+                    'HARGA_PAKET'       => $getDataArray['hargaPaket'],
+                    'TOTAL_BAYAR'       => $getDataArray['totalBayar'],
+                    'TANGGAL_START'     => $now,
+                    'TANGGAL_END'       => $tomorrow,
+                    'NamaBank'          => $dataPembayaran['namaBank'],
+                    'NoRek'             => $dataPembayaran['noRek'],
+                    'RekAtasNama'       => $dataPembayaran['namaRek'],
+                    'BuktiTransaksi'    => "",
+                    'CONFIRMED'         => 0,
+                    'ENABLE'            => 0
+                );
+                $this->db->insert('data_transaksi', $data);
+
+                $batasakhir = $tomorrow;
+            }
+
+        }
+        return $batasakhir;
+    }
+    function UploadBuktiPembayaran($content){
+        $session_id = $this->session->userdata('loginData');
+        $this -> db -> from('data_transaksi');
+        $this -> db -> where('ID_user',$session_id['ID_user']);
+        $query = $this->db->get();
+
+        foreach ($query->result() as $row)
+        {
+            $idTransaksi = $row->ID_TRANSAKSI;
+        }
+
+        $this->db->set('BuktiTransaksi', $content);
+        $this->db->where('ID_TRANSAKSI', $idTransaksi);
+        $this->db->update('data_transaksi');
     }
 }

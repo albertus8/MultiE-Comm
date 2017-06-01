@@ -13,16 +13,21 @@ class Admins extends CI_Controller
         $session_id = $this->session->userdata('loginData');
         $this->load->helper(array('form'));
         $this->load->library('form_validation');
+//        $this->output->enable_profiler(TRUE);
 
         if($this->session->userdata('loginData')) {
-            $this->load->view('_header', $session_id);
-            $this->load->view('index');
-            $this->load->view('footer');
+            if($session_id['userLevel'] == '1'){
+                $this->load->view('_header', $session_id);
+                $this->load->view('index');
+                $this->load->view('footer');
+            }else{
+                redirect('Home', 'refresh');
+            }
         }
         else
         {
             //If no session, redirect to login page
-            redirect('', 'refresh');
+            redirect('Landing', 'refresh');
         }
     }
 }
