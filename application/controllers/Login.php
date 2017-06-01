@@ -4,7 +4,8 @@ class Login extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('dbLogin','',TRUE);
+        $this->load->model('DbLogin','',TRUE);
+        $this->load->model('DbPayment','',TRUE);
     }
     public function index()
     {
@@ -43,7 +44,7 @@ class Login extends CI_Controller {
                 $username = $this->input->post('username');
                 $password = $this->input->post('password');
 
-                $result = $this->dbLogin->login($username, $password);
+                $result = $this->DbLogin->login($username, $password);
 
                 if($result)
                 {
@@ -58,6 +59,8 @@ class Login extends CI_Controller {
                         }
 
                     }elseif ($result["userLevel"] == "2" || $result["userLevel"] == "3"){
+                        $dataCheckout = $this->DbPayment->checkCheckout();
+                        $this->session->set_userdata('dataConfirmation', $dataCheckout);
                         if($from == 'checkout'){
                             $this->session->unset_userdata('From');
                             redirect('Checkout');

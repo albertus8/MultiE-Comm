@@ -135,7 +135,6 @@ class Subscriber extends CI_Controller
                 'deleteDate' => "0000-00-00 00:00:00"
             )
         );
-
         $this->DbActions->insertUser($getDataArray);
     }
     function deleteUser(){
@@ -171,8 +170,8 @@ class Subscriber extends CI_Controller
         echo "</div>";
     }
 
-    function deleteUserPost(){
-        $data = $this->input->post('getData');
-        $this->DbActions->deleteUser($data);
-    }
+function deleteUserPost(){
+    $data = $this->input->post('getData');
+    $this->DbActions->deleteUser($data);
+}
 }

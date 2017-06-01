@@ -54,21 +54,20 @@ class Fitur extends CI_Controller
         echo "</div>";
     }
 
-    function insertFitur(){
-        $data = $this->input->post('getData');
+function insertFitur(){
+    $data = $this->input->post('getData');
 
-        $data = array(
-            array(
-                'ID_Paket' => $data[0],
-                'NAMA_PAKET' => $data[1],
-                'HARGA_PAKET' => $data[2],
-                'DETAIL_PAKET' => $data[3],
-                'ENABLE' => "1"
-            )
-        );
-
-        $this->DbActions->insertFitur($data);
-    }
+    $data = array(
+        array(
+            'ID_Paket' => $data[0],
+            'NAMA_PAKET' => $data[1],
+            'HARGA_PAKET' => $data[2],
+            'DETAIL_PAKET' => $data[3],
+            'ENABLE' => "1"
+        )
+    );
+    $this->DbActions->insertFitur($data);
+}
 
     function updateFitur(){
         echo "<div class='form-group'>";
@@ -149,9 +148,6 @@ class Fitur extends CI_Controller
                 'ENABLE' => 1
             )
         );
-
-        print_r($getDataArray);
-
         $this->DbActions->updateFitur($getDataArray);
     }
 

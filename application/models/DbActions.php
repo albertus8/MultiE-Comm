@@ -11,32 +11,22 @@ Class DbActions extends CI_Model
         parent::__construct();
     }
 
-    function getTableFitur(){
-        $this->db->select("*");
-        $this->db->from('paket_berlangganan');
-//        $this->db->where('ENABLE', '1');
-
-        $query = $this->db->get();
-
-        if($query -> num_rows() > 0)
-        {
-            foreach ($query->result() as $row)
-            {
-                $data[] = array(
-                    "ID"          => $row->ID_PAKET,
-                    "Nama Paket"  => $row->NAMA_PAKET,
-                    "Harga"       => $row->HARGA_PAKET,
-                    "Detail"      => $row->DETAIL_PAKET,
-                    "Enable"      => $row->ENABLE
-                );
-            }
-            return $data;
+function getTableFitur(){
+    $this->db->from('paket_berlangganan');
+    $query = $this->db->get();
+    if($query -> num_rows() > 0) {
+        foreach ($query->result() as $row) {
+            $data[] = array(
+                "ID"          => $row->ID_PAKET,
+                "Nama Paket"  => $row->NAMA_PAKET,
+                "Harga"       => $row->HARGA_PAKET,
+                "Detail"      => $row->DETAIL_PAKET,
+                "Enable"      => $row->ENABLE
+            );
         }
-        else
-        {
-            return false;
-        }
+        return $data;
     }
+}
 
     function insertFitur($data){
         $this->db->insert_batch('paket_berlangganan', $data);

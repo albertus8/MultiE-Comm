@@ -93,8 +93,8 @@
                             data: {getData: something},
                             type: 'post',
                             success: function(result) {
-//                                alert("click");
-//                                console.log(result);
+                    //                                alert("click");
+                    //                                console.log(result);
                                 $('#myModal').modal('hide');
                                 $('body').removeClass('modal-open');
                                 $('.modal-backdrop').remove();
@@ -237,32 +237,28 @@
                 <div class="col-lg-9">
                     <h2>Data Fitur Paket Berlangganan</h2>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nama Paket</th>
-                                <!--                                    <th class='text-center'>Tanggal</th>-->
-                                <th class='text-center'>Harga</th>
-<!--                                <th>Detail</th>-->
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            for ($j = 0; $j < count($data); $j++){
-                                if($data[$j]['Enable'] == "1"){
-                                    echo "<tr>";
-                                    echo "<td>".$data[$j]['ID']."</td>";
-                                    echo "<td>".$data[$j]['Nama Paket']."</td>";
-                                    echo "<td class='text-right' style='white-space:pre;width: 20px'>IDR".str_pad(number_format($data[$j]['Harga'],2,',','.'),20 ," ",STR_PAD_LEFT)."</td>";
-//                                    echo "<td>".$data[$j]['Detail']."</td>";
-                                    echo "</tr>";
-                                }
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama Paket</th>
+                            <th class='text-center'>Harga</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        for ($j = 0; $j < count($data); $j++){
+                            if($data[$j]['Enable'] == "1"){
+                                echo "<tr>";
+                                echo "<td>".$data[$j]['ID']."</td>";
+                                echo "<td>".$data[$j]['Nama Paket']."</td>";
+                                echo "<td class='text-right' style='white-space:pre;width: 20px'>IDR".str_pad(number_format($data[$j]['Harga'],2,',','.'),20 ," ",STR_PAD_LEFT)."</td>";
+                                echo "</tr>";
                             }
-                            //
-                            //                                ?>
-                            </tbody>
-                        </table>
+                        }
+                        ?>
+                        </tbody>
+                    </table>
                     </div>
                 </div>
                 <div class="col-lg-3 well">

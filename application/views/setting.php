@@ -21,7 +21,7 @@
             formData.append("idUser", '<?php echo $ID_user; ?>')
             console.log(formData);
             $.ajax({
-                url             : 'api/fileUpload/',  //server script to process data
+                url             : 'Api/fileUpload/',  //server script to process data
                 type            : 'POST',
                 fileElementId	: 'userfile',
                 data            : formData,
@@ -52,12 +52,17 @@
                     if(result){
                         $('#myModal').modal('toggle');
                         $('.modal-body').find('#targetView').html(result);
+                        $('#myModal').on('hidden.bs.modal', function () {
+                            $(".container-fluid").load("Setting");
+                        })
+
                     }
                     else {
 
                         $(".alert.alert-danger").fadeIn("slow");
                     }
                     console.log(result);
+
                 }
             });
         }

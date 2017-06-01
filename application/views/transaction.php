@@ -16,43 +16,25 @@
         $('#transaction2 tbody').find("tr").css( 'cursor', 'pointer' );
 //        $('#transaction3 tbody').find("tr").css( 'cursor', 'pointer' );
 
-        $('#transaction2 tbody').find("tr").on('click',function(){
-            loadPopupBox();
-            var idTransaksi = $(this).find("td:first-child").text();
-            $('#activateUser').on('click',function(){
-//                console.log(idTransaksi);
-                $.ajax({
-                    url: 'Transaction/acceptTransaction',
-                    data: {data: idTransaksi},
-                    type: 'post',
-                    success: function(result) {
-                        console.log(result);
-                        $('#myModal').modal('hide');
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
-                        $(".container-fluid").load("Transaction/#transaction2");
-                        $('body').css("overflow","auto");
-                    }
-                });
-            });
-//            var something = $(this).find("td:first-child").text();
-
-//            $.ajax({
-//                url: 'Transaction/postInsert',
-//                data: {getData: "test"},
-//                type: 'post',
-//                success: function(result) {
-//                    $(".modal-body").html(result);
-//                    $('.userLevel li a').on('click', function(){
-//                        $(".primary-userLevel").html($(this).text() + " <span class='caret'></span></button>");
-//                    });
-//                    $('.userStatus li a').on('click', function(){
-//                        $(".primary-userStatus").html($(this).text() + " <span class='caret'></span></button>");
-//                    });
-//                }
-//            });
-
+$('#transaction2 tbody').find("tr").on('click',function(){
+    loadPopupBox();
+    var idTransaksi = $(this).find("td:first-child").text();
+    $('#activateUser').on('click',function(){
+        $.ajax({
+            url: 'Transaction/acceptTransaction',
+            data: {data: idTransaksi},
+            type: 'post',
+            success: function(result) {
+                console.log(result);
+                $('#myModal').modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+                $(".container-fluid").load("Transaction/#transaction2");
+                $('body').css("overflow","auto");
+            }
         });
+    });
+});
     });
 </script>
 <div class="row">
@@ -75,33 +57,6 @@
 </div>
 
 <div class="row">
-<!--    <div class='tabs-x tabs-below'>-->
-<!--        <div id="myTabContent-2" class="tab-content">-->
-<!--            <ul id="myTab-2" class="nav nav-tabs" role="tablist">-->
-<!--                <li class="active"><a href="#home-2" role="tab" data-toggle="tab">Home</a>-->
-<!---->
-<!--                </li>-->
-<!--                <li><a href="#profile-2" role="tab-kv" data-toggle="tab">Profile</a>-->
-<!---->
-<!--                </li>-->
-<!--            </ul>-->
-<!--            <div class="tab-pane fade in active" id="home-2">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-xs-4">-->
-<!--                        <p>The FALSE Tabs</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="tab-pane fade" id="profile-2">-->
-<!--                <p>The True TaBs WORKED</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--    </div>-->
-
-
-
-
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -236,7 +191,6 @@
                                     echo "<td class='text-center'><span class='label label-danger'>EXPIRED</span></td>";
                                     echo "</tr>";
                                 }
-
                             }
                             ?>
                             </tbody>
