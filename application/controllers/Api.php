@@ -6,11 +6,11 @@
  */
 require(APPPATH.'libraries/REST_Controller.php');
 
-class api extends REST_Controller {
+class Api extends REST_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('insertApi','',TRUE);
+        $this->load->model('InsertApi','',TRUE);
     }
     function data_get()
     {
@@ -79,7 +79,7 @@ class api extends REST_Controller {
             fclose($fp);
         }
 
-        $this->insertApi->insertData($session_id['ID_user']);
+        $this->InsertApi->insertData($session_id['ID_user']);
         return true;
     }
 
@@ -113,6 +113,9 @@ class api extends REST_Controller {
         // END OF SYNTAX
     }
 
+    function coba_get(){
+        $this->response("berhasil");
+    }
 //
 //    function user_put()
 //    {
