@@ -12,7 +12,6 @@
         $('.table tr').on('click',function(){
             loadPopupBox();
             var something = $(this).find("td:first-child").text();
-
             $.ajax({
                 url: 'Tables/detailProduk',
                 data: {getData: something},
@@ -22,33 +21,13 @@
                 }
             });
         });
-//        $('#close-icon').on('click',function(){
-//            unloadPopupBox();
-//        });
-
         function loadPopupBox()
         {
-//            $('body').css('overflow','hidden');
-            //$("#popupbackground").fadeIn("slow");
             $('#myModal').modal('toggle');
-            //$("#popupbox").fadeIn("slow")
-//            $(".modal-body").css('overflow','auto !important');
         }
-//        function unloadPopupBox()
-//        {
-//            $('body').css('overflow','auto');
-//            $("#popupbackground").fadeOut("normal");
-//            $("#popupbox").fadeOut("normal");
-////            $(".modal-body").css('overflow','hidden !important');
-////            $("body").css('overflow','auto !important');
-//        }
-//        $("#popupbackground").hide();
-//        $("#popupbox").hide();
-
         $("#searchBox").on('keyup', function (e) {
             if (e.keyCode == 13) {
                 // Do something
-//                alert("enter");
                 var something = $(this).val();
                 $(".modal-body pre").html(something);
 //                $.ajax({
